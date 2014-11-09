@@ -1,0 +1,88 @@
+## Welcome screen
+##################################################
+# Bashrc greetings				 #
+##################################################
+
+###### greeting
+# # from Jonathan's .bashrc file (by ~71KR117)
+# # get current hour (24 clock format i.e. 0-23)
+hour=$(date +"%H")
+# # if it is midnight to midafternoon will say G'morning
+if [ $hour -ge 0 -a $hour -lt 12 ]
+ then
+   greet="Good Morning, $USER. Welcome back."
+# # if it is midafternoon to evening ( before 6 pm) will say G'noon
+elif [ $hour -ge 12 -a $hour -lt 18 ]
+ then
+   greet="Good Afternoon, $USER. Welcome back."
+else # it is good evening till midnight
+   greet="Good Evening, $USER. Welcome back."
+fi
+# # display greeting
+echo $greet
+echo ''
+
+###### holiday greeting
+# # from Jonathan's .bashrc file (by ~71KR117)
+# # get current day (Month-Day Format)
+day=$(date +"%B%e")
+# # get current year (for new years greeting)
+year=$(date +"%Y")
+# # make sure the holiday greeting is displayed (if any)
+hol=1
+# # if it is New Year's Day
+if [ "$day" = "Januar1" ]
+ then
+   holgreet="Happy New Years. Have a Happy $year."
+# # if it is Groundhog Day
+elif [ "$day" = "Februar2" ]
+ then
+   holgreet="Have a Happy Groundhog Day."
+# # if it is Valentine's Day
+elif [ "$day" = "Februar14" ]
+ then
+   holgreet="Have a Happy Valentine's Day."
+# # if it is Independance Day
+elif [ "$day" = "April30" ]
+ then
+   holgreet="Eine schöne Walpurgisnacht!"
+# # if it is my birthday
+elif [ "$day" = "Juni15" ]
+ then
+   holgreet="Have a Happy Birthday."
+# # if it is Halloween
+elif [ "$day" = "Oktober31" ]
+ then
+   holgreet="Happy Halloween."
+# # if it is Christmas Eve
+elif [ "$day" = "Dezember24" ]
+ then
+   holgreet="Merry Christmas Eve."
+# # if it is Christmas
+elif [ "$day" = "Dezember25" ]
+ then
+   holgreet="Merry Christmas."
+# # if it is New Year's Eve
+elif [ "$day" = "Dezember31" ]
+ then
+   holgreet="Happy New Year's Eve."
+else
+   hol=0
+fi
+# # display holiday greeting
+if [ "$hol" = "1" ]
+ then
+   echo $holgreet
+elif [ "$hol" = "0" ]
+ then
+   randomvarthatsomehowimportant=0
+fi
+
+connected
+if [ "$CONNECT" = "1" ]
+then
+   wetter
+   suntimes
+   echo ''
+fi
+fortune -s

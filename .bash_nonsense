@@ -1,0 +1,261 @@
+## am-i-confident
+# usage: confident
+confident() { echo "You Are SUPER Confident ◕‿◕"; }
+
+## captainplanet
+# usage: captainplanet
+captainplanet () {
+	echo "EARTH!...
+FIRE!...
+WIND!...
+WATER!...
+HEART!...
+
+BY YOUR POWERS COMBINED, I AM CAPTAIN PLANET!
+
+                        ......                            
+                    :dooxxxxxx:                           
+                    ddkdloxkxkx                           
+                    dxkdd::xdkd                           
+                    :klc:;;c:dc                           
+                    lxxl:::cc0c                           
+                    :xk:l:clo0x                           
+                     :x;;:cc:xo,.                         
+               ..':okxxldl,;lxkkOxlclc:,                  
+            .;dkxxkkxxxkOldlxkkxxkkxxxxxx,                
+           'kxxxxxxxxxOxocoodoOkxxxxxxxodkl               
+          ,dlllxxxxxxxOOdloodokxxxxxxd;,,cod'             
+         l:;,,,:xkxxxxxkOkkkkOkkkxxoo;,,,,,ld;            
+        ;;,,,,cokloxlc::c:co:;;;,;o,dc:,,,,,col.          
+       ::,,codd; :;c:;cl;,:c,:lccoco' .';o:;,;ddc         
+     .l;,,,cd.    ;l:ldo,,lo,,odcl,     ;kdlclldc         
+     .lcc;lxkO,     l,:d;,;l,;dl,d'..  ,xxxkOddl          
+      .:okOxxxkc.,llkOO0KO:;ckXNNWXkkxkkxkkOko,           
+        .oOOkkkkkxxxNMMMMO;,,kMMMMNkkxkkkl:.              
+           .',cd0kkOKKK000dloOOOOOKkoo;.                  
+                .'':0xxxxxxxxxxxxOOc                      
+                   cxxxxxxxxxxxxkddo,                     
+                  cc,,coxxxxxxxd:,;ld;                    
+                 ;c,,,,,;lkxxxc,,,,;ld,                   
+                .l,,,,,,,:kc;d,,,,,,;ox.                  
+                o,,,,,,,,ld  ;l,,,,,,:ox                  
+               c:,,,,,,,:k.   c:,,,,,,ox,                 
+               c,,,,,,,:d,     l;,,,,,:x:                 
+               ,;,,,,,col      .o,,,,,cd;                 
+                d,,,;old        .c,,,,dd:                 
+                d:,colo.         .;;,;ddk.                
+                oc,:ox.            o,,,lld.               
+               ;;;,,ld             .c;,clld.              
+              ':,,clk.              .l,,,:oo              
+             ,c,,,,dd;              ::,,,,dk:             
+             Oxc,,:kkc              ckdc;oOOo             
+            .KxxookO0,               xkxxxOO:             
+             0xxxxOkx                 oOxxO0.             
+             dkxxkOx.                  oxxOo              
+             .Oxxk0.                   :kx0'              
+              dxxOk                    ,kkO.              
+              :xxOx                    .xxOo              
+              xxkkO.                    oxkO.             
+             ;kxxkk:                   .xxxOx'            
+           .lkxxkOl                    ,Oxkkkc            
+           ;Okkkxc                      .;::,             
+            .,'. 
+"
+}
+seaking () {
+echo "
+FUCK YEAH SEAKING!
+
+                                         ',.                      
+                             ......   .'.. ..'.                   
+                .......     ;     .',..    .  .,                  
+               .;.;.........c.   . .,      :   :.      .......    
+                .,.: ,       .''.; ',   ,k:.  .,  ......     .,,  
+    .:.          ,..,:          'c ,'     ; c.l...           ...: 
+     ;.''.       .c.cc,..   ;   ..;;.;KK: ; .,. lk...      .....;.
+      :. .''..,:lddxkO0XXKOxo. ..  x..XKXd;,.  .Ol.     ........: 
+      .:    .ldoooooooodOKKKKX0d....; oKolc   ''     .........,'  
+       .c.   ;xoooodxkkood0XKKKKXO' :...';::.'   :'.........,'    
+       .doc:ldooooOO:WWWddoKKXXKXXKlc'.,:.ol.   ,d:.......,'      
+      .dooooooood:KWWWWWkcokXOxKkxKXX;.l.';   ..',''....,,        
+      doooooooooodoxO0OdcdoxNkxxodo0Xxl;::. .,,'.     .,'         
+     :xddddddoooooodolokOOokXoKXxKxoOOOc:..,'.'.   ....c          
+    .dxOkddcxx:.:oooxOOkxooXxooxxOooxOxx':;'dKXd       .,         
+     ;Kkc:odoxx..look0K0xdKOooodXXxoooox:' .''..        .''       
+     'dddddoc;.  ;ooooookKxl:ldoxkllc:.c..                 ''     
+     .c          .ooooodx:. lkdcc.    .:',;,'..':;.         .;    
+   .'.c;         .oooood. '..ll .,.   l;;,'..  cOKXd.       .,    
+  '..clkc......  'oooood   ;.c0.  '. c'..,,''..'',::.......'.     
+ ,..;kXd.;,.....'dxddodo   ..'.    .oc;.c.         ........       
+...: .:....cdkxxxxxxkx:,     .... ..;;,c:,.                       
+,..  .''.'',.'ocdkkko..    .cc..';'...,kd'',                      
+ .....     ;,',  .cc         ..'l' ; .KK0;. ;.                    
+               .'.;'..,:,c';'''.,..,  oxK..  ;                    
+              ','. ckkdc:..;    ,',.  ;;d.   ;                    
+              ;;  .::.;,.';     .;;   'lc    ;                    
+               ;..,.'::;,.       ;;    c.  .,                     
+                ';,l:,;.          ,....l,'..                      
+                   ..                ..
+"
+}
+
+oscillate () {
+	echo "
+I HAVE FREE WILL TO DO WHAT I WANT BUT I CHOOSE TO OSCILLATE
+XXXXXXXXXXXX; 'KXXXXXXXXXXXXXXXXXXXXXXXX0, .lK
+XXXXXXXX0o;'...,,,,,,,',;:codO0XXXXXXX0;  ;0XX
+KXXXXXO:.:k0XXXXXXXXXXKOOkxoc:,,,;,;co' .xXXXX
+.lKX0'.oKXXXXXXXXXXXXXXXXXXXXXXXXXKOxoc:'.:OXX
+x;'  ;KXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX0l'.l
+Xk.'OXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXO:
+k :KXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+ cKXXXXXXXKOdlllllldxO0KXXXXXXXXXXXXXXXXXXXXXX
+.0XXXXXXd...;l.   .c;... .xXXXXXXXXXXXXXXXXXXX
+:XXXXXXXO:,,;;;;;;;;;:c:lOXXXXXXK:.  ..'...;,,
+xXXXXXXXXXXXXXXXXXXXKxOXXXXXXXXXXXKxo:,.   coc
+XXXXXXXXXXXXXXXXXXXl.;xXXXXXXXXXXXXXXXXXX0kxoo
+XXXXXXXXXXXXXXXXX0..kXXXXXXXXXXXXXXXXXXXXXXXXX
+XXXXXXXXXXXXXXXXx..OXXXXXXXXXXXXXXXXXXXXXXXXXX
+XXXXXXXXXXXXXX0. 'dOXXXXXXXXXXXXXXXXXXXXXXXXXX
+XXXKddXXXXXXXXXKkoc:0XXXXXXXXXXXXXXXXXXXXXXXXX
+XKc.:kXXKOxdolc:::::cclodk00KXXXXXXXXXXk:kXXXX
+Xo kXl,.   ...',,,,;::ccc;,,''',,,,,:dKX: 0XXX
+XXKXX0Oxxo:'.....''...    ...''''.  ,c0K,.0XXX
+XXXXXXXXXXXXXXXOkxxxxxxxxxxxx000kkkkXXXXKKXXXX
+XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+KXXXXXXXXXO:0XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+.,xKXXXXXX0,.ok00k:.dXXXXXXXXXXXXXXXXXXXXXXXXX
+K' .dKXXXXXXo.    .OXXXXXXXXXXXXXXXXXXXXXXXXXX"
+}
+
+hack () {
+	while [ "$1" != "" ]; do
+		case $1 in
+			-i | --interface )	
+				shift
+				echo -e "Hacking $1... \nComplete."
+				;;
+			-n | --name )
+				shift
+				echo -e "Retrieving IP...\n"
+				echo -e "Hacking $1...\nComplete."
+				;;
+			-u | --username )
+				shift
+				echo -e "Retrieving password for account $1...\nPassword: $(head -c 8 /dev/urandom | od -t a | tr -d '[:space:]0')"
+				;;
+			* )
+				echo "invalid option $1"
+				;;
+		esac
+		shift
+	done
+}
+
+pirat() {
+echo -E ""
+echo -E "              |    |    |					";
+echo -E "             )_)  )_)  )_)					";
+echo -E "            )___))___))___)\				";
+echo -E "           )____)____)_____)\\				";
+echo -E "         _____|____|____|____\\\__         ";
+echo -E "---------\                   /---------	";
+echo -E "  ^^^^^ ^^^^^^^^^^^^^^^^^^^^^				";
+echo -E "    ^^^^      ^^^^     ^^^    ^^			";
+echo -E "         ^^^^      ^^^						";
+echo -E "     We have no nation but the sea         ";
+echo -E "   No creed but that we will live free     ";
+echo -E ""
+}
+
+zraten() { 
+###### a simple number guessing game
+biggest=1000                            # maximum number possible
+guess=0                                 # guessed by player
+guesses=0                               # number of guesses made
+number=$(( $$ % $biggest ))             # random number, 1 .. $biggest
+while [ $guess -ne $number ] ; do
+  echo -n "Raten? " ; read guess
+  if [ "$guess" -lt $number ] ; then
+    echo "... größer!"
+  elif [ "$guess" -gt $number ] ; then
+    echo "... kleiner!"
+  fi
+  guesses=$(( $guesses + 1 ))
+done
+echo "Richtig!! Erratene Nummer $number in $guesses versuchen." 
+}
+
+spruch() {
+# Gibt mittels Cowsay und Fortunes Sprueche aus
+if [ -f /usr/games/fortune -a -d /usr/share/cowsay ]; then
+    dir='/usr/share/cowsay/cows/'
+    file=`/bin/ls -1 "$dir" | sort --random-sort | head -1`
+    cow=$(echo "$file" | sed -e "s/\.cow//")
+    /usr/games/fortune | /usr/games/cowsay -f $cow
+fi
+}
+
+###### roll a single die of "$1" sides, just once
+# default number of sides is 6
+# roll_die 10  # returns 1 to 10 as per 10 sides
+# roll_die 2   # returns 1 or 2 as per 2 sides
+# written by Dallas Vogels
+roll() {
+  # capture parameter
+  declare -i DIE_SIDES=$1
+  # check for die sides
+  if [ ! $DIE_SIDES -gt 0 ]; then
+    # default to 6
+    DIE_SIDES=6
+  fi
+  # echo to screen
+  echo $[ ( $RANDOM % $DIE_SIDES )  + 1 ]
+}
+
+## pretend to be busy in office to enjoy a cup of coffee
+cafe() { cat /dev/urandom | hexdump -C | grep --color=auto "ca fe" ; }
+
+## 
+oneliners() { w3m -dump_source http://www.onelinerz.net/random-one-liners/1/ | awk ' /.*<div id=\"oneliner_[0-9].*/ {while (! /\/div/ ) { gsub("\n", ""); getline; }; gsub (/<[^>][^>]*>/, "", $0); print $0}'; }
+
+## 
+coin() { (( $RANDOM >> 14 )) && echo heads || echo tails ; }
+
+###### random number (out of whatever you input)
+# example:  getnum 10 = 4
+# copyright 2007 - 2010 Christopher Bratusek
+getnum() { 
+  if [[ $1 == -l ]]; then
+    echo $(cat /dev/urandom | tr -cd '[:digit:]' | head -c ${2-5})
+  elif [[ $1 == -r ]]; then
+    echo $((RANDOM%${2}))
+  else  
+    echo $((RANDOM%${1}))
+  fi
+}
+
+###### anagrams
+function anagram()
+{
+cat > "/tmp/anagrams.py" <<"End-of-message"
+#!/usr/bin/python
+infile = open ("/usr/share/dict/words", "r")
+## "dict" is a reserved word
+words_in = infile.readlines()
+scrambled = raw_input("Enter the scrambled word: ")
+scrambled = scrambled.lower()
+scrambled_list = list(scrambled)
+scrambled_list.sort()
+for word in words_in:
+    word_list = list(word.strip().lower())
+    word_list.sort()
+    ## you don't really have to compare lengths when using lists as the
+    ## extra compare takes about as long as finding the first difference
+    if word_list == scrambled_list:
+        print word, scrambled
+End-of-message
+chmod +x "/tmp/anagrams.py"
+"/tmp/anagrams.py" "$1"
+rm "/tmp/anagrams.py"
+}

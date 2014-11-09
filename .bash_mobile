@@ -1,0 +1,58 @@
+## cleanly list available wireless networks (using iwlist)
+wscan() { iwlist wlan0 scan | sed -ne 's#^[[:space:]]*\(Quality=\|Encryption key:\|ESSID:\)#\1#p' -e 's#^[[:space:]]*\(Mode:.*\)$#\1\n#p' ; }
+
+###### notify on Battery power
+# works on laptops, desktop having communication b/w UPS & CPU
+NotifyOnBATTERY() { while :; do on_ac_power||notify-send "Running on BATTERY"; sleep 1m; done ; }
+
+show_battery_load()
+# copyright 2007 - 2010 Christopher Bratusek
+{
+	case $1 in
+		*acpi )
+			check_opt acpi show_battery_load::acpi
+			if [[ $? != "1" ]]; then
+				load=$(acpi -b | sed -e "s/.* \([1-9][0-9]*\)%.*/\1/")
+				out="$(acpi -b)"
+				state="$(echo "${out}" | awk '{print $3}')"
+				case ${state} in
+					charging,)
+						statesign="^"
+					;;
+					discharging,)
+						statesign="v"
+					;;
+					charged,)
+						statesign="°"
+					;;
+				esac
+				battery="${statesign}${load}"
+				echo $battery
+			fi
+		;;
+		*apm )
+			check_opt apm show_battery_load::apm
+			if [[ $? != "1" ]]; then
+				result="$(apm)"
+				case ${result} in
+					*'AC on'*)
+						state="^"
+					;;
+					*'AC off'*)
+						state="v"
+					;;
+				esac
+				load="${temp##* }"
+				battery="${state}${load}"
+				echo $battery
+			fi
+		;;
+		* )
+			echo -e "\n${ewhite}Usage:\n"
+			echo -e "${eorange}show_battery_load${ewhite} |${egreen} --acpi${eiceblue} [show batteryload using acpi]\
+			\n${eorange}show_battery_load${ewhite} |${egreen} --apm${eiceblue} [show batteryload using apm]" | column -t
+			echo ""
+			tput sgr0
+		;;
+	esac
+}
