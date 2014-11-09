@@ -1,0 +1,7 @@
+[user]
+	name = BlackRocket
+	email = sebastian@brcs.eu
+[core]
+	editor = vim
+[push]
+	default = simple
