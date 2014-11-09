@@ -1,0 +1,112 @@
+#mksplitrar
+
+#!/bin/s
+set -- `getopt "echg:o:p:" "$@"` 
+output="x"
+grose="x"
+while :
+do
+case "$1" in
+		
+	-h) help=1;;
+	-c) dc=1;;
+	-e) ein=1;;
+	-o) shift; output="$1" ;;
+	-g) shift; grose="$1";;
+	-p) shift; pw="$1";;
+	--) break ;;
+esac
+      shift
+done
+shift
+files=$*
+hilfe () {
+echo 
+echo "MkSplit ist ein Script zum erstellen gesplitteten Rar-Archiven."
+echo
+echo "Syntax:"
+echo
+echo "mksplitrar -o [Archiv.rar] -g [Größe der gesplitteten Dateien] Dateien"
+echo
+echo "Optionen:"
+echo
+echo "-h Help"
+echo 
+echo "-o Zieldatei z.B -o Test.rar "
+echo 
+echo "-g Größe der gesplitteten Dateien in Mb z.B. -g 15"
+echo 
+echo "-p Setzt ein Passwort z.B. -p geheim"
+echo 
+echo "-c Nur in verbindung von -p, verschlüsselt die Dateinamen."
+echo "Noch ein Beispiel:"
+echo 
+echo "mksplitrar -o test.rar -g 5 -p geheim -c bild1.jpg bild2.jpg "
+echo 
+echo "Erzeugt 5 Mb große Splitarchiven in denen bild1.jpg und bild2.jpg enthalten sind die Datein werden erst nach Eingabe des Passworts geheim sichtbar."
+echo
+}
+
+
+if [ "$help" = 1 ]
+	then 
+	hilfe
+	exit 0
+fi
+
+if [ "$ein" = 1 ]
+	then
+	echo Bitte Zielarchiv eingeben:
+	read output
+	echo Bitte Splitarchivgröße in Mb angegen:
+	read grose
+	echo "Passwort setzen? ( j oder n )"
+	read pw1
+	if  [ "$pw1" = "j" ]
+	then echo Passwort eingeben
+	read pw
+	echo "Dateinamen verschlüsseln? ( j oder n )"
+	read dc1 
+		if [ "$dc1" = "j" ]
+		then dc=1
+		fi
+	fi
+
+fi
+
+if [ "$output" = "x" ]
+	then
+	echo Kein Ausgabearchiv angegeben!
+	hilfe
+	exit 1
+	elif [ "$*" = "0" ]
+	then
+	echo Keine Dateien zum packen angegeben
+	hilfe
+	exit 1
+fi
+echo ZielRar: $output  
+echo Zu packende Dateien: $files
+echo Größe pro .part-Datei: $grose MB
+if [ "$grose" = "0" ]
+then grose = 15
+fi
+
+#mio="1000000"
+size=$(expr "$grose" \* 1048576)
+echo $size
+if [ "$pw" != "" ]
+	then
+	if [ "$dc" = "1" ]
+		then rar a -v"$size"b -m0 -hp$pw $output $files
+		else rar a -v"$size"b -m0 -p$pw $output $files
+	fi
+	else rar a -v"$size"b -m0 $output $files
+fi
+
+#echo Created with mksplitrar >mksplitrar
+#rar c $output <mksplitrar
+#rm mksplitrar
+echo Alle Aufgaben beendet.
+echo Passwort: $pw
+exit 0
