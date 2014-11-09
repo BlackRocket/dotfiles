@@ -7,7 +7,7 @@ if [ ! -d "${HOME}/build" ]; then mkdir ${HOME}/build ; chmod 700 ${HOME}/build 
 if [ ! -d "${HOME}/tmp" ]; then mkdir ${HOME}/tmp ; chmod 700 ${HOME}/tmp ; fi
 if [ ! -d "${HOME}/blog" ]; then mkdir ${HOME}/blog ; chmod 700 ${HOME}/blog ; fi
 if [ ! -f $HOME/.bash_history ]; then touch $HOME/.bash_history; fi
-PATH=$PATH:"/usr/local:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:$HOME/bin:/usr/lib/wine/bin:/sbin:/usr/sbin:/usr/local/bin:$HOME/.todo"
+PATH=$PATH:"/usr/local:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:$HOME/bin:/usr/lib/wine/bin"
 
 
 # ---- Exports ---- #
@@ -122,5 +122,3 @@ require_machine annica
 
 # Make 'source .bashrc' return 0
 trap log_commands DEBUG
-
-. $HOME/.shellrc.load
