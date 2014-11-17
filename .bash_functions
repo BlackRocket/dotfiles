@@ -3,6 +3,7 @@
 # functions)					                           #
 ##################################################
 
+
 # Avoid being sourced twice
 [[ "`type -t in_array`" == "function" ]] && return 1 
 
@@ -24,6 +25,35 @@ in_array() {
     return 1
 }
 
+
+# Test which machine we run on
+#
+# $1        machine or list of machines which the script runs on .
+#           use the actual hostname, please
+# returns   0 if the script is runnable in this host, 1 else
+# example   require_machine ""
+require_machine() {
+    return `in_array $HOSTNAME "$1"`
+}
+
+# Bookmarks
+export MARKPATH=$HOME/.marks
+function jump { 
+    cd -P "$MARKPATH/$1" 2>/dev/null || echo "No such mark: $1"
+}
+function mark { 
+    mkdir -p "$MARKPATH"; ln -s "$(pwd)" "$MARKPATH/$1"
+}
+function unmark { 
+    rm -i "$MARKPATH/$1"
+}
+function marks {
+    ls -l "$MARKPATH" | sed 's/  / /g' | cut -d' ' -f9- | sed 's/ -/\t-/g' && echo
+}
+
+command_exists () {
+    type "$1" &> /dev/null ;
+}
 
 # Test which machine we run on
 #
@@ -321,3 +351,65 @@ imgurcdl() { mkdir "$1"; cd "$1"; wget -q "http://imgur.com/a/${2}/layout/blog" 
 ## Remove apps with style: nuke it from orbit
 # usage: nuke [name of the program]
 nuke() { if [ $(whoami) != "root" ] ; then for x in $@; do sudo apt-get autoremove --purge $x; done; else for x in $@; do apt-get autoremove --purge $x; done; fi }
+
+
+quickmail() { echo "$*" | mail -s "$*" sebastian@brcs.eu; }
+
+## cleanly list available wireless networks (using iwlist)
+wscan() { iwlist wlan0 scan | sed -ne 's#^[[:space:]]*\(Quality=\|Encryption key:\|ESSID:\)#\1#p' -e 's#^[[:space:]]*\(Mode:.*\)$#\1\n#p' ; }
+
+###### notify on Battery power
+# works on laptops, desktop having communication b/w UPS & CPU
+NotifyOnBATTERY() { while :; do on_ac_power||notify-send "Running on BATTERY"; sleep 1m; done ; }
+
+# copyright 2007 - 2010 Christopher Bratusek
+show_battery_load()
+{
+  case $1 in
+    *acpi )
+      check_opt acpi show_battery_load::acpi
+      if [[ $? != "1" ]]; then
+        load=$(acpi -b | sed -e "s/.* \([1-9][0-9]*\)%.*/\1/")
+        out="$(acpi -b)"
+        state="$(echo "${out}" | awk '{print $3}')"
+        case ${state} in
+          charging,)
+            statesign="^"
+          ;;
+          discharging,)
+            statesign="v"
+          ;;
+          charged,)
+            statesign="°"
+          ;;
+        esac
+        battery="${statesign}${load}"
+        echo $battery
+      fi
+    ;;
+    *apm )
+      check_opt apm show_battery_load::apm
+      if [[ $? != "1" ]]; then
+        result="$(apm)"
+        case ${result} in
+          *'AC on'*)
+            state="^"
+          ;;
+          *'AC off'*)
+            state="v"
+          ;;
+        esac
+        load="${temp##* }"
+        battery="${state}${load}"
+        echo $battery
+      fi
+    ;;
+    * )
+      echo -e "\n${ewhite}Usage:\n"
+      echo -e "${eorange}show_battery_load${ewhite} |${egreen} --acpi${eiceblue} [show batteryload using acpi]\
+      \n${eorange}show_battery_load${ewhite} |${egreen} --apm${eiceblue} [show batteryload using apm]" | column -t
+      echo ""
+      tput sgr0
+    ;;
+  esac
+}

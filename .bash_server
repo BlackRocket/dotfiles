@@ -1,6 +1,0 @@
-## Email yourself a short note   
-quickmail() { echo "$*" | mail -s "$*" sebastian@brcs.eu; }
-
-# Info on startup
-echo -e "\e[1;1m$(uname -s -r)\e[0m ($HOSTNAME)"
-echo $(uptime) | cut -d' ' -f2-

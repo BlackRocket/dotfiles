@@ -3,6 +3,11 @@
 # Bashrc greetings				 #
 ##################################################
 
+# Info on startup
+echo -e "\e[1;1m$(uname -s -r)\e[0m ($HOSTNAME)"
+echo $(uptime) | cut -d' ' -f2-
+echo ''
+
 ###### greeting
 # # from Jonathan's .bashrc file (by ~71KR117)
 # # get current hour (24 clock format i.e. 0-23)
@@ -54,6 +59,14 @@ elif [ "$day" = "Juni15" ]
 elif [ "$day" = "Oktober31" ]
  then
    holgreet="Happy Halloween."
+# # if it is ninth november 
+elif [ "$day" = "November5" ]
+ then
+   holgreet="Remember, remember the Fifth of November Gunpowder, treason and plot; I know of no reason why gunpowder treason Should ever be forgot."
+# # if it is ninth november 
+elif [ "$day" = "November9" ]
+ then
+   holgreet="Das tritt nach meiner Kenntnis... ist das sofort... unverzüglich."
 # # if it is Christmas Eve
 elif [ "$day" = "Dezember24" ]
  then
@@ -81,7 +94,10 @@ fi
 connected
 if [ "$CONNECT" = "1" ]
 then
-   wetter
+   if command_exists weather 
+   then
+      wetter
+   fi
    suntimes
    echo ''
 fi
