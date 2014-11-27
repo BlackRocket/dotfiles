@@ -41,6 +41,7 @@ export MARKPATH=$HOME/.marks
 function jump { 
     cd -P "$MARKPATH/$1" 2>/dev/null || echo "No such mark: $1"
 }
+
 function mark { 
     mkdir -p "$MARKPATH"; ln -s "$(pwd)" "$MARKPATH/$1"
 }
@@ -53,6 +54,10 @@ function marks {
 
 command_exists () {
     type "$1" &> /dev/null ;
+}
+
+rgc() {
+    git commit -m"`curl -s http://whatthecommit.com/index.txt`"
 }
 
 # Test which machine we run on

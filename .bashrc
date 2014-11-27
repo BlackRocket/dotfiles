@@ -1,3 +1,11 @@
+# ---- source ---- #
+if [ -f /etc/bash.bashrc ];       then source /etc/bash.bashrc;         fi
+source ~/.bash_functions;
+source ~/bin/gitprompt.sh;
+source ~/.bash_keys;
+source ~/.bash_colors;
+source ~/.bash_nonsense;
+
 # Check for an interactive session
 [ -z "$PS1" ] && return
 if [[ $- != *i* ]] ; then return; fi
@@ -46,14 +54,6 @@ shopt -s nocaseglob
 shopt -s sourcepath
 stty start undef
 stty stop undef
-
-# ---- source ---- #
-if [ -f /etc/bash.bashrc ];       then source /etc/bash.bashrc;         fi
-if [ -f $HOME/.bash_keys ];       then source $HOME/.bash_keys;         fi
-if [ -f $HOME/bin/gitprompt.sh ]; then source $HOME/bin/gitprompt.sh;   fi
-if [ -f $HOME/.bash_functions ];  then source $HOME/.bash_functions;    fi
-if [ -f $HOME/.bash_colors ];     then source $HOME/.bash_colors;       fi
-if [ -f $HOME/.bash_nonsense ];   then source $HOME/.bash_nonsense;     fi
 	
 # ---- bash completion ---- #
 if [ -f /etc/bash_completion ];         then source /etc/bash_completion;         fi
@@ -297,7 +297,7 @@ log_commands() {
     fi
 }
 
-if [ -f $HOME/.bash_welcome ]; then . $HOME/.bash_welcome; fi
+source ~/.bash_welcome;
 
 # ---- Machine-specific ---- #
 require_machine anniki
