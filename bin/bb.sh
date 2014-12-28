@@ -17,7 +17,7 @@ global_config=".config"
 # by the 'global_config' file contents
 global_variables() {
     global_software_name="BashBlog"
-    global_software_version="2.3.3"
+    global_software_version="2.4"
 
     # Blog title
     global_title="Blog"
@@ -74,7 +74,7 @@ License."
     # "cut" blog entry when putting it to index page. Leave blank for full articles in front page
     # i.e. include only up to first '<hr>', or '----' in markdown
     cut_do="cut"
-    # When cutting, cut also tags? If blank, tags will appear in index page for cut articles
+    # When cutting, cut also tags? If "no", tags will appear in index page for cut articles
     cut_tags="yes"
     # Regexp matching the HTML line where to do the cut
     # note that slash is regexp separator so you need to prepend it with backslash
@@ -327,6 +327,24 @@ edit() {
     fi
 }
 
+# Create a Twitter summary (twitter "card") for the post
+#
+# $1 the post file
+# $2 the title
+twitter_card() {
+    [[ -z "$global_twitter_username" ]] && return
+    
+    echo "<meta name='twitter:card' content='summary' />"
+    echo "<meta name='twitter:site' content='@$global_twitter_username' />"
+    echo "<meta name='twitter:title' content='$2' />" # Twitter truncates at 70 char
+    description=$(grep -v "^<p>$template_tags_line_header" $1 | sed -e 's/<[^>]*>//g' | head -c 250 | tr '\n' ' ' | sed "s/\"/'/g") 
+    echo "<meta name='twitter:description' content=\"$description\" />"
+    image=$(sed -n 's/.*<img.*src="\([^"]*\)".*/\1/p' $1 | head -n 1) # First image is fine
+    [[ -z "$image" ]] && return
+    [[ $image =~ ^https?:\/\/ ]] || image="$global_url/$image" # Check that URL is absolute
+    echo "<meta name='twitter:image' content='$image' />"
+}
+
 # Adds the code needed by the twitter button
 #
 # $1 the post URL
@@ -406,6 +424,7 @@ create_html_page() {
     # html, head
     cat ".header.html" > "$filename"
     echo "<title>$title</title>" >> "$filename"
+    twitter_card "$content" "$title" >> "$filename"
     echo "</head><body>" >> "$filename"
     # stuff to add before the actual body content
     [[ -n "$body_begin_file" ]] && cat "$body_begin_file" >> "$filename"
@@ -534,6 +553,14 @@ write_entry() {
         [[ "$extension" == "md" || "$extension" == "html" ]] && fmt="$extension"
         # but let user override it (`bb.sh post -html file.md`)
         [[ "$2" == "-html" ]] && fmt="html"
+        # Test if Markdown is working before re-posting a .md file
+        if [[ "$extension" == "md" ]]; then
+            test_markdown
+            if [[ "$?" -ne 0 ]]; then
+                echo "Markdown is not working, please edit HTML file directly."
+                exit
+            fi
+        fi
     else
         TMPFILE=".entry-$RANDOM.$fmt"
         echo -e "Title on this line\n" >> "$TMPFILE"
@@ -852,8 +879,8 @@ create_includes() {
         echo '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">' > ".header.html"
         echo '<html xmlns="http://www.w3.org/1999/xhtml"><head>' >> ".header.html"
         echo '<meta http-equiv="Content-type" content="text/html;charset=UTF-8" />' >> ".header.html"
-        echo '<link href="http://fonts.brcs.eu/font-awesome.min.css" rel="stylesheet">' >> ".header.html"
-        echo '<link href="http://fonts.brcs.eu/style.css" rel="stylesheet">' >> ".header.html"
+        echo '<link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">' >> ".header.html"
+        echo '<link href='http://fonts.googleapis.com/css?family=Roboto:400,700,400italic|Rochester' rel='stylesheet' type='text/css'>' >> ".header.html"
         echo '<link rel="stylesheet" href="http://base.brcs.eu/v5/css/bootstrap.min.css">' >> ".header.html"
         echo '<link rel="stylesheet" href="http://base.brcs.eu/v5/css/style.css">' >> ".header.html"
 		for css_file in ${css_include[*]}; do
@@ -1021,10 +1048,10 @@ date_version_detect() {
                     stat -f "%Sm" -t "$format" "$2"
                 elif [[ $(echo $@ | grep '\-\-date') ]]; then
                     # convert between dates using BSD date syntax
-                    /bin/date -j -f "%a, %d %b %Y %H:%M:%S %z" "$(echo $2 | sed 's/\-\-date\=//g')" "$1" 
+                    command date -j -f "%a, %d %b %Y %H:%M:%S %z" "$(echo $2 | sed 's/\-\-date\=//g')" "$1" 
                 else
                     # acceptable format for BSD date
-                    /bin/date -j "$@"
+                    command date -j "$@"
                 fi
             }
         fi

@@ -1,3 +1,10 @@
+# PATH, Folders & Files
+if [ ! -d "${HOME}/build" ]; then mkdir ${HOME}/build ; chmod 700 ${HOME}/build ; fi
+if [ ! -d "${HOME}/tmp" ]; then mkdir ${HOME}/tmp ; chmod 700 ${HOME}/tmp ; fi
+if [ ! -d "${HOME}/blog" ]; then mkdir ${HOME}/blog ; chmod 700 ${HOME}/blog ; fi
+if [ ! -f $HOME/.bash_history ]; then touch $HOME/.bash_history; fi
+if [ ! -L ~/.bash_keys ]; then ln -s ~/connect/bash_keys ~/.bash_keys; fi
+
 # ---- source ---- #
 if [ -f /etc/bash.bashrc ];       then source /etc/bash.bashrc;         fi
 source ~/.bash_functions;
@@ -11,11 +18,11 @@ source ~/.bash_nonsense;
 if [[ $- != *i* ]] ; then return; fi
 
 # PATH, Folders & Files
-if [ ! -d "${HOME}/build" ]; then mkdir ${HOME}/build ; chmod 700 ${HOME}/build ; fi
-if [ ! -d "${HOME}/tmp" ]; then mkdir ${HOME}/tmp ; chmod 700 ${HOME}/tmp ; fi
-if [ ! -d "${HOME}/blog" ]; then mkdir ${HOME}/blog ; chmod 700 ${HOME}/blog ; fi
-if [ ! -f $HOME/.bash_history ]; then touch $HOME/.bash_history; fi
-
+if [ ! -d ~/build ]; then mkdir ~/build ; chmod 700 ~/build ; fi
+if [ ! -d ~/tmp ]; then mkdir ~/tmp ; chmod 700 ~/tmp ; fi
+if [ ! -d ~/blog ]; then mkdir ~/blog ; chmod 700 ~/blog ; fi
+if [ ! -f ~/.bash_history ]; then touch ~/.bash_history; fi
+if [ ! -L ~/.bash_keys ]; then ln -s ~/connect/bash_keys ~/.bash_keys; fi
 
 # ---- Exports ---- #
 set -b
@@ -209,7 +216,6 @@ alias screensaver="cmatrix"
 # Git stuff  
 alias gitouch="find . \( -type d -empty \) -and \( -not -regex ./\.git.* \) -exec touch {}/.gitignore \;"
 alias gitup="git pull"
-alias gitci="git commit -a -m"
 alias gitco="git clone"
 alias gita="git add"
 alias gitb="git branch"
@@ -255,6 +261,27 @@ fi
 # ---- Stuff to Execute ---- #
 # Source for is_screen(), retval(), retval2(), PROMPT_COMMAND, PS1, require_machine
 # https://github.com/cfenollosa/dotfiles/blob/master/.bashrc
+
+# Avoid being sourced twice
+[[ "`type -t in_array`" == "function" ]] && return 1 
+
+# Check if a value exists in an array
+in_array() {
+    haystack=$2
+
+    if [ -z "$1" ]; then return 1; fi
+
+    for i in ${haystack[@]}; do
+        [[ "$1" == "$i" ]] && return 0
+    done
+
+    return 1
+}
+
+# Test which machine we run on
+require_machine() {
+    return `in_array $HOSTNAME "$1"`
+}
 
 is_screen() {
   if [[ "$HOSTNAME" == "anniki" ]]; then 

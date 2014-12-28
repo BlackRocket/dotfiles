@@ -25,7 +25,6 @@ else # it is good evening till midnight
 fi
 # # display greeting
 echo $greet
-echo ''
 
 ###### holiday greeting
 # # from Jonathan's .bashrc file (by ~71KR117)
@@ -75,6 +74,10 @@ elif [ "$day" = "Dezember24" ]
 elif [ "$day" = "Dezember25" ]
  then
    holgreet="Merry Christmas."
+# # if it is Christmas
+elif [ "$day" = "Dezember26" ]
+ then
+   holgreet="Merry Christmas."
 # # if it is New Year's Eve
 elif [ "$day" = "Dezember31" ]
  then
@@ -91,14 +94,14 @@ elif [ "$hol" = "0" ]
    randomvarthatsomehowimportant=0
 fi
 
-connected
-if [ "$CONNECT" = "1" ]
-then
-   if command_exists weather 
+wget -q --tries=20 --timeout=10 http://www.google.com -O /tmp/google.idx &> /dev/null ; 
+if [ -s /tmp/google.idx ]; 
    then
-      wetter
-   fi
-   suntimes
-   echo ''
+      if command_exists weather 
+         then
+            wetter
+            suntimes
+      fi
 fi
+echo ''
 fortune -s
