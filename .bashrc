@@ -17,13 +17,6 @@ source ~/.bash_nonsense;
 [ -z "$PS1" ] && return
 if [[ $- != *i* ]] ; then return; fi
 
-# PATH, Folders & Files
-if [ ! -d ~/build ]; then mkdir ~/build ; chmod 700 ~/build ; fi
-if [ ! -d ~/tmp ]; then mkdir ~/tmp ; chmod 700 ~/tmp ; fi
-if [ ! -d ~/blog ]; then mkdir ~/blog ; chmod 700 ~/blog ; fi
-if [ ! -f ~/.bash_history ]; then touch ~/.bash_history; fi
-if [ ! -L ~/.bash_keys ]; then ln -s ~/connect/bash_keys ~/.bash_keys; fi
-
 # ---- Exports ---- #
 set -b
 set -o notify
