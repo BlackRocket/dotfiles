@@ -16,9 +16,10 @@
  /bin/df -H | grep Dateisystem
  /bin/df -H | grep 'da'
  /bin/df -H | grep 'db'
+ /bin/df -H | grep 'dc'
  echo
  echo R A M
- free | grep 'total' | awk '{print $1" "$2" "$3}'
+ free | grep 'total' | awk '{print $1"    "$2"    "$3}'
  free | grep 'Mem' | awk '{print $2" "$3" "$4}'
  echo
  echo S W A P
@@ -26,7 +27,7 @@
  free | grep 'Swap' | awk '{print $2" "$3" "$4}'
  echo
  echo I P - L A N
- /sbin/ip addr show eth0 | grep 'inet ' | cut -d t -f2 | cut -d / -f1 | cut -b 2-
+ /sbin/ip addr show eth1 | grep 'inet ' | cut -d t -f2 | cut -d / -f1 | cut -b 2-
  echo
  echo I P - W A N
- lynx -dump http://checkip.dyndns.org
+ dig +short myip.opendns.com @resolver1.opendns.com

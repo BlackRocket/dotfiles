@@ -7,109 +7,21 @@
 
 # Bookmarks
 export MARKPATH=$HOME/.marks
-function jump { 
-    cd -P "$MARKPATH/$1" 2>/dev/null || echo "No such mark: $1"
-}
+go() { cd -P "$MARKPATH/$1" 2>/dev/null || echo "No such mark: $1"; }
+mark() { mkdir -p "$MARKPATH"; ln -s "$(pwd)" "$MARKPATH/$1"; }
+unmark() { rm -i "$MARKPATH/$1"; }
+marks() { ls -l "$MARKPATH" | sed 's/  / /g' | cut -d' ' -f9- | sed 's/ -/\t-/g' && echo ;}
 
-function mark { 
-    mkdir -p "$MARKPATH"; ln -s "$(pwd)" "$MARKPATH/$1"
-}
-function unmark { 
-    rm -i "$MARKPATH/$1"
-}
-function marks {
-    ls -l "$MARKPATH" | sed 's/  / /g' | cut -d' ' -f9- | sed 's/ -/\t-/g' && echo
-}
-
-command_exists () {
-    type "$1" &> /dev/null ;
-}
-
-rgc() {
-    git commit -m"`curl -s http://whatthecommit.com/index.txt`"
-}
+command_exists () { type "$1" &> /dev/null ; }
+sh_coloroff() { echo -en "$reset_color"; }
+sh_colormsg() { [ -n "$1" ] && echo -en "${fg_bold}${@}${reset_color}"; }
+sh_error() { echo -e "${fg_bold}[ e ]${reset_color} $@"; }
+sh_info() { echo -e "${fg_bold}[ i ]${reset_color} $@"; }
+sh_success() { echo -e "${fg_bold}[ k ]${reset_color} $@"; }
+sh_mesg(){ echo -e "${fg_bold}[ m ]${reset_color} $@"; }
 
 DISTRO='unknown'
 DISTRO=$(lsb_release -i | awk -F ":" '{ print $2 }' | sed -e 's/^[ \t]*//')
-
-##
-# Author: Josh Bailey
-# Email: jbsnake <at> <no spam> usalug.org
-# usage: getExtension <filename>
-function getExtension() { echo "${1##*.}"; }
-
-##
-# Author: Josh Bailey
-# Email: jbsnake <at> <no spam> usalug.org
-# further tweaked by: jsz
-# usage: getFileName <filename>
-function getFileName() {
-    local filename=${1##*/}
-    echo "${filename%.*}"
-}
-
-##
-# Author: Josh Bailey
-# Email: jbsnake <at> <no spam> usalug.org
-# further tweaked by: jsz
-# usage: getPath <filename>
-function getPath() { echo "${1%/*}"; }
-
-##
-# Author: Josh Bailey
-# Email: jbsnake <at> <no spam> usalug.org
-# further tweaked by: jsz
-# usage: inStr <char> <string>
-inStr() {
-    local i
-
-    for ((i = 0; i < ${#2}; i++)); do
-        if [[ ${2:i:1} = $1 ]]; then
-            echo "$i"
-        fi
-    done
-}
-
-##
-# Author: Josh Bailey
-# Email: jbsnake <at> <no spam> usalug.org
-function notADot() {
-   if [[ ${1} != '.' ]]
-   then
-      return 0
-   else
-      return 1
-   fi
-}
-
-function notAForwardSlash() {
-   if [[ ${1} != '/' ]]
-        then
-      return 0
-        else
-           return 1
-        fi
-}
-
-##
-#
-function die() { result=$1;shift;[ -n "$*" ]&&printf "%s\n" "$*" >&2;exit $result; }
-
-
-## Check variable has been set does not require a test handles like an assertion
-#
-function isdef() { eval test -n \"\${$1+1}\"; }
-
-## If no comment, inserts the date.
-# Usage: flag "comment"
-function flag() {
-    if [ "$1" == "" ];
-    then
-        echo -e  "\e[0;31m[====== " `date +"%A %e %B %Y"`, `date +"%H"`h`date +"%M"` " ======]\e[0m"
-    else
-        echo -e  "\e[0;31m[====== " $@ " ======]\e[0m"
-    fi
-}
 
 ##
 # Shell function which detects the Linux distro it's running on
@@ -217,12 +129,6 @@ geoip() { geoiplookup $1; }
 ## find an unused unprivileged TCP port
 findtcp() { (netstat  -atn | awk '{printf "%s\n%s\n", $4, $4}' | grep -oE '[0-9]*$'; seq 32768 61000) | sort -n | uniq -u | head -n 1; }
 
-## binary clock
-buhr() { perl -e 'for(;;){@d=split("",`date +%H%M%S`);print"\r";for(0..5){printf"%.4b ",$d[$_]}sleep 1}'; }
-
-## 
-uhr() { while true;do clear;echo "===========";date +"%r";echo "===========";sleep 1; done }
-
 ##
 addclock() { while sleep 1;do tput sc;tput cup 0 $(($(tput cols)-29));date;tput rc;done & }
 
@@ -316,25 +222,15 @@ log() { echo "$1" 1>&2 ; logger -ist "$(basename -- "$0")" "$1" ; }
 # usage: SSID
 SSID () { iwconfig wlan0 | grep ESSID | cut -c 31-50 ;}
 
-## imgur album downloader (a)
-# usage: imgurdl [album id]
-imgurdl() { wget -q "http://imgur.com/a/${1}/layout/blog" -O -|grep '"image"'|cut -d\" -f4|while read id; do echo "Downloading $id.jpg"; wget -q -c "http://i.imgur.com/$id.jpg"; done ; }
-
-## imgur gallery downloader (r)
-# usage: imgurgdl [gallery id]
-imgurgdl() { wget -q "http://imgur.com/r/${1}" -O -|grep 'post"'|cut -d\" -f2|while read id; do echo "Downloading $id.jpg"; wget -q -c "http://i.imgur.com/$id.jpg"; done; }
-
-## imgur comic album downloader (a)
-# usage: imgurcdl '[comic name]' [album id]
-imgurcdl() { mkdir "$1"; cd "$1"; wget -q "http://imgur.com/a/${2}/layout/blog" -O -|grep '"image"'|cut -d\" -f4|while read id; do x=$(( $x + 1 )); echo "Downloading ${x}_${id}.jpg"; wget -q -c "http://i.imgur.com/$id.jpg" -O "${x}_$id.jpg"; done; cd .. ; }
-
-
 ## Remove apps with style: nuke it from orbit
 # usage: nuke [name of the program]
 nuke() { if [ $(whoami) != "root" ] ; then for x in $@; do sudo apt-get autoremove --purge $x; done; else for x in $@; do apt-get autoremove --purge $x; done; fi }
 
-
 quickmail() { echo "$*" | mail -s "$*" sebastian@brcs.eu; }
+
+rgc() { git commit -m"`curl -s http://whatthecommit.com/index.txt`"; }
+
+pass() { </dev/urandom tr -dc '12345!@#$%qwertQWERTasdfg47f0)W^9gNa!)LR(TbQjh&UwnvP(tD5eAzr6fk@E&y(umB3^h@!K^cbOCV)ScFJoYi2q@MIX8!1ASDFGzxcvbZXCVBHpZld&xsG47f0)W^9gNa!)LR(TbQjh&UwnvP(tD5eAzr6fk@E&y(umB3^h@!K^cbOCV)ScFJoYi2q@MIX8!1' | head -c$1; echo ""; history -d $(($HISTCMD-1)); }
 
 ## cleanly list available wireless networks (using iwlist)
 wscan() { iwlist wlan0 scan | sed -ne 's#^[[:space:]]*\(Quality=\|Encryption key:\|ESSID:\)#\1#p' -e 's#^[[:space:]]*\(Mode:.*\)$#\1\n#p' ; }

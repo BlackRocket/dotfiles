@@ -64,8 +64,6 @@ if [ -f $HOME/.bash_complete ];         then source $HOME/.bash_complete;       
 # enable color support of ls and also add handy aliases
 eval "`dircolors -b`"
 
-# bash tipps
-alias btipps="$HOME/bin/btipps.sh"
 
 # file and folder handlings
 alias ls="ls -lA -F -h -X --group-directories-first --color=always"
@@ -84,23 +82,10 @@ alias rmdir="trash"
 alias rm="trash"
 alias clean="*rm -f "#"* "."*~ *~ *.bak *.dvi *.aux *.log*"
 alias mkdir="mkdir -pv"
-alias rbs="$HOME/bin/rbs.sh"
-alias rlc="$HOME/bin/rlc.sh"
-alias ruc="$HOME/bin/ruc.sh"
-alias ren="$HOME/bin/ren.sh"
-alias mvg="$HOME/bin/mvg.sh"
-alias cpg="$HOME/bin/cpg.sh"
-alias unpack="$HOME/bin/unpack.sh"
-alias compress="$HOME/bin/pack.sh"
-alias splitrar="$HOME/splitrar.sh"
-alias rename="$HOME/bin/chnames.sh"
-alias rename2="$HOME/bin/rename.sh"
-alias umlaute="$HOME/bin/umlaute.pl"
-alias md5="/usr/bin/md5sum -c"
+alias md5="md5sum -c"
 alias count="wc -l"
 alias patch="patch -p1 <"
 alias repar="par2 r"
-alias nas="$HOME/bin/mountnas.sh"
 
 # Apt-get stuff     
 alias check="sudo apt-get check"
@@ -109,7 +94,6 @@ alias apti="sudo apt-get install"
 alias apta="sudo apt-add-repository"
 alias aptu="sudo apt-get update"
 alias aptr="sudo apt-get remove"
-alias upchk="$HOME/bin/upchk.sh"
 alias upgrade="sudo apt-get update && sudo apt-get upgrade && sudo apt-get clean"
 alias dist-upgrade="sudo apt-get -qq update ; sudo apt-get dist-upgrade --assume-yes --force-yes"
 
@@ -118,18 +102,7 @@ alias ipt="sudo iptables -L"
 alias scan="sudo nmap localhost"
 alias net="sudo netstat -ap" 
 alias tail="tail -n 40"
-alias sysinfo="sudo $HOME/bin/sysinfo.sh"
-alias sysinfo2="$HOME/bin/sysinfo2.sh"
-alias settime="sudo $HOME/bin/time.sh"
-alias showmem="$HOME/bin/showmem.sh"
-alias showtty="$HOME/bin/showtty.sh"
-alias showup="$HOME/bin/showuptime.sh"
-alias ii="$HOME/bin/ii.sh"
-alias metabackup="$HOME/bin/metabackup.sh"
-alias netinfo="$HOME/bin/netinfo.sh"
-alias cleanup="$HOME/bin/cleanup.sh"
-alias cpuload="$HOME/bin/cpuload.sh"
-alias pskill="$HOME/bin/pskill.sh"
+
 
 # LaTeX
 alias lmk="latexmk -pdflatex=lualatex -pdf -pv -view=pdf"
@@ -137,15 +110,15 @@ alias pdflatex='pdflatex -interaction nonstopmode'
 alias texdir="perl $HOME/bin/dirtree.pl"
 
 # remote
-#alias ssh="ssh -X"
+alias ssh="ssh -X"
 
 # Blog
 alias mblog="sshfs ${DF_FTP_USER}@${DF_FTP_URL}:/ /home/blackrocket/blog ; cd /home/blackrocket/blog"
 alias ublog=".. ; fusermount -u /home/blackrocket/blog"
-alias blogpost="$HOME/bin/bb.sh post"
-alias postedit="$HOME/bin/bb.sh edit"
-alias postlist="$HOME/bin/bb.sh list"
-alias blogrebuild="$HOME/bin/bb.sh rebuild"
+alias blogpost="bb post"
+alias postedit="bb edit"
+alias postlist="bb list"
+alias blogrebuild="bb rebuild"
 
 # Download
 alias ytmp3='youtube-dl -x --audio-format mp3 --audio-quality 0 -o "%(title)s.%(ext)s" --restrict-filenames'
@@ -153,43 +126,15 @@ alias ytogg='youtube-dl -x --audio-format vorbis --audio-quality 0 -o "%(title)s
 alias ytdl='youtube-dl --max-quality=MP4 -o "%(title)s.%(ext)s" --restrict-filenames'
 alias wgeturlfromfile="wget -r -l1 -H -t1 -nd -N -np -A.jpg -erobots=off -i"        # -i file.txt
 alias wget="wget -c"
-alias 4chandl="$HOME/bin/download_4chan_lwp.pl"
-alias tpb="$HOME/bin/tpb.sh"
-alias teu="$HOME/bin/teu.sh"
-alias tumblrdl="$HOME/bin/gettumblrpics.sh"
 
 # Apps
 alias vi="vim"
 alias boinc="open $HOME/BOINC/run_manager"
-alias lotto="$HOME/bin/lotto.sh"
-alias timer="$HOME/bin/timer.sh"
-alias stopuhr="$HOME/bin/stopuhr.sh"
-alias pass="$HOME/bin/pass.sh"
-alias cal="$HOME/bin/cal.sh"
-alias radio="$HOME/bin/radio.sh"
-
-# Media
-alias movieshot="$HOME/bin/shot.sh"
-alias thumbit="$HOME/bin/thumbit.sh"
-alias upimg="$HOME/bin/imgurbash.sh"
-alias m3u="$HOME/bin/makem3u.sh"
-alias pngopti="$HOME/bin/pngopti.sh"
-alias audio="$HOME/bin/audio.sh"
-
-# Convert
-alias toiso="$HOME/bin/toiso.sh"
-alias video2avi="$HOME/bin/video2avi.sh"
-alias video2dvd="$HOME/bin/video2dvd.sh"
-alias pdf2text="$HOME/bin/pdf2text.sh"
-alias convertatemp="$HOME/bin/convertatemp.sh"
 
 # Web
-alias wa="$HOME/bin/wa.sh"
 alias DropUp="$HOME/bin/dropbox_uploader upload"
 alias DropDown="$HOME/bin/dropbox_uploader download"
 alias ifdown="$HOME/bin/downforme.sh"
-alias hostscheck="$HOME/bin/hostscheck.sh"
-alias tweet="$HOME/bin/tweet.sh"
 
 # Notes
 alias note="$HOME/bin/note.sh -n"
@@ -202,15 +147,6 @@ alias reboot="sudo shutdown -r now"
 alias ShutUp="sudo shutdown -h now"
 alias sleeptime="sudo shutdown -P -h "
 alias screensaver="cmatrix"
-
-# Git stuff  
-alias gitouch="find . \( -type d -empty \) -and \( -not -regex ./\.git.* \) -exec touch {}/.gitignore \;"
-alias gitup="git pull"
-alias gitco="git clone"
-alias gita="git add"
-alias gitb="git branch"
-alias gitc="git checkout"
-alias gitlo='git log --graph --full-history --all --color --pretty=format:"%x1b[31m%h%x09%x1b[32m%d%x1b[0m%x20%s %C(bold blue)<%an>%Creset" --abbrev-commit'
 
 # Webserver
 alias wwwrestart="sudo service apache2 restart"

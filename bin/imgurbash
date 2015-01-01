@@ -93,10 +93,9 @@ while [ $# -gt 0 ]; do
 	# parse the response and output our stuff
 	url=$(echo $response | sed -r 's/.*<original_image>(.*)<\/original_image>.*/\1/')
 	deleteurl=$(echo $response | sed -r 's/.*<delete_page>(.*)<\/delete_page>.*/\1/')
-	echo ${url}
+	echo ${url} | xclip -selection clipboard
 	echo "Delete page: $deleteurl" >&2
-	echo $(curl -sX POST "http://pics.brcs.eu/api?upload=${url}&key=${PICSKEY}&format=xml"|grep 'image_shorturl'|awk -F "[<>]" '{print $3}') | xclip -selection clipboard
-	$BROWSER $deleteurl
+	$BROWSER $url 
 done
 
 if $errors; then
