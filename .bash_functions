@@ -183,7 +183,27 @@ sanitize() { sudo chmod -R 700 "$@"; }
 permfix() { if [ -d "$1" ]; then find "$1" -type d -exec chmod 755 {} -type f -exec chmod 644 {} \; else echo "$1 is not a directory."; fi ; }
 
 ## 
-wetter() { weather -q --cacheage 1800 --cachedir=$HOME/tmp  EDDB; }
+wetter() { 
+var_data=$(curl -s 'http://weather.tuxnet24.de/?id=GMXX0185')
+
+var_data_humidity=$(echo "$var_data" | grep humidity | cut -c12-15)
+var_data_temp=$(echo "$var_data" | grep current_temp | cut -c16-25)
+var_data_text=$(echo "$var_data" | grep current_text | cut -c16-60)
+var_data_speed=$(echo "$var_data" | grep speed | cut -c9-20)
+var_data_direction=$(echo "$var_data" | grep direction | cut -c13-17)
+var_data_visib=$(echo "$var_data" | grep visib | cut -c14-25)
+var_data_pressure=$(echo "$var_data" | grep pressure | cut -c12-25)
+var_data_sunrise=$(echo "$var_data" | grep sunrise | cut -c10-17)
+var_data_sunset=$(echo "$var_data" | grep sunset | cut -c9-17)
+
+echo -e "Wetter: ${var_data_temp} ${var_data_text}"
+echo -e "Relative Luftfeuchte: ${var_data_humidity}"
+echo -e "Windgeschwindigkeit:$ ${var_data_speed} (${var_data_direction})"
+echo -e "Sichtweite: ${var_data_visib}"
+echo -e "Luftdruck: ${var_data_pressure}"
+echo -e "Sonnenaufgang: ${var_data_sunrise}"
+echo -e "Sonnenuntergang: ${var_data_sunset}"
+}
 
 ##  Nice mount output
 nicemount() { (echo "DEVICE PATH TYPE FLAGS" && mount | awk '$2=$4="";1') | column -t; }
@@ -205,9 +225,6 @@ uhr() { while true;do clear;echo "===========";date +"%r";echo "===========";sle
 
 ##
 addclock() { while sleep 1;do tput sc;tput cup 0 $(($(tput cols)-29));date;tput rc;done & }
-
-## get sunrise and sunset times 518763
-suntimes() { curl -s http://weather.yahooapis.com/forecastrss?w=518763|grep astronomy| awk -F\" '{print "Sonnenaufgang: " $2 "\nSonnenuntergang: " $4;}'; }
 
 ## Creates a backup of the file passed as parameter with the date and time
 bak() { cp $1 $1_`date +%H:%M:%S_%d-%m-%Y` ; }

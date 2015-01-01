@@ -3,13 +3,12 @@ if [ ! -d "${HOME}/build" ]; then mkdir ${HOME}/build ; chmod 700 ${HOME}/build 
 if [ ! -d "${HOME}/tmp" ]; then mkdir ${HOME}/tmp ; chmod 700 ${HOME}/tmp ; fi
 if [ ! -d "${HOME}/blog" ]; then mkdir ${HOME}/blog ; chmod 700 ${HOME}/blog ; fi
 if [ ! -f $HOME/.bash_history ]; then touch $HOME/.bash_history; fi
-if [ ! -L ~/.bash_keys ]; then ln -s ~/connect/bash_keys ~/.bash_keys; fi
+if [ ! -L ~/.bash_keys ]; then ln -s ~/connect/bash_keys ~/.bash_keys; source ~/.bash_keys; fi
 
 # ---- source ---- #
 if [ -f /etc/bash.bashrc ];       then source /etc/bash.bashrc;         fi
 source ~/.bash_functions;
 source ~/bin/gitprompt.sh;
-source ~/.bash_keys;
 source ~/.bash_colors;
 source ~/.bash_nonsense;
 
@@ -108,6 +107,7 @@ alias aptsource="sudo apt-get source"
 alias apti="sudo apt-get install"
 alias apta="sudo apt-add-repository"
 alias aptu="sudo apt-get update"
+alias aptr="sudo apt-get remove"
 alias upchk="$HOME/bin/upchk.sh"
 alias upgrade="sudo apt-get update && sudo apt-get upgrade && sudo apt-get clean"
 alias dist-upgrade="sudo apt-get -qq update ; sudo apt-get dist-upgrade --assume-yes --force-yes"
@@ -161,7 +161,6 @@ alias tumblrdl="$HOME/bin/gettumblrpics.sh"
 alias vi="vim"
 alias boinc="open $HOME/BOINC/run_manager"
 alias lotto="$HOME/bin/lotto.sh"
-alias t="$HOME/.todo/todo.sh -d $HOME/.todo/todo.cfg"
 alias timer="$HOME/bin/timer.sh"
 alias stopuhr="$HOME/bin/stopuhr.sh"
 alias pass="$HOME/bin/pass.sh"
@@ -180,9 +179,6 @@ alias audio="$HOME/bin/audio.sh"
 alias toiso="$HOME/bin/toiso.sh"
 alias video2avi="$HOME/bin/video2avi.sh"
 alias video2dvd="$HOME/bin/video2dvd.sh"
-alias dvd2mpg="$HOME/bin/dvd2mpg.sh"
-alias dvd2iso="$HOME/bin/dvd2iso.sh"
-alias arabic2roman="$HOME/bin/arabic2roman.sh"
 alias pdf2text="$HOME/bin/pdf2text.sh"
 alias convertatemp="$HOME/bin/convertatemp.sh"
 

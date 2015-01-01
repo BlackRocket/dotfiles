@@ -35,51 +35,51 @@ year=$(date +"%Y")
 # # make sure the holiday greeting is displayed (if any)
 hol=1
 # # if it is New Year's Day
-if [ "$day" = "Januar1" ]
+if [ "$day" = "Januar 1" ]
  then
    holgreet="Happy New Years. Have a Happy $year."
 # # if it is Groundhog Day
-elif [ "$day" = "Februar2" ]
+elif [ "$day" = "Februar 2" ]
  then
    holgreet="Have a Happy Groundhog Day."
 # # if it is Valentine's Day
-elif [ "$day" = "Februar14" ]
+elif [ "$day" = "Februar 14" ]
  then
    holgreet="Have a Happy Valentine's Day."
 # # if it is Independance Day
-elif [ "$day" = "April30" ]
+elif [ "$day" = "April 30" ]
  then
    holgreet="Eine schöne Walpurgisnacht!"
 # # if it is my birthday
-elif [ "$day" = "Juni15" ]
+elif [ "$day" = "Juni 15" ]
  then
    holgreet="Have a Happy Birthday."
 # # if it is Halloween
-elif [ "$day" = "Oktober31" ]
+elif [ "$day" = "Oktober 31" ]
  then
    holgreet="Happy Halloween."
 # # if it is ninth november 
-elif [ "$day" = "November5" ]
+elif [ "$day" = "November 5" ]
  then
    holgreet="Remember, remember the Fifth of November Gunpowder, treason and plot; I know of no reason why gunpowder treason Should ever be forgot."
 # # if it is ninth november 
-elif [ "$day" = "November9" ]
+elif [ "$day" = "November 9" ]
  then
    holgreet="Das tritt nach meiner Kenntnis... ist das sofort... unverzüglich."
 # # if it is Christmas Eve
-elif [ "$day" = "Dezember24" ]
+elif [ "$day" = "Dezember 24" ]
  then
    holgreet="Merry Christmas Eve."
 # # if it is Christmas
-elif [ "$day" = "Dezember25" ]
+elif [ "$day" = "Dezember 25" ]
  then
    holgreet="Merry Christmas."
 # # if it is Christmas
-elif [ "$day" = "Dezember26" ]
+elif [ "$day" = "Dezember 26" ]
  then
    holgreet="Merry Christmas."
 # # if it is New Year's Eve
-elif [ "$day" = "Dezember31" ]
+elif [ "$day" = "Dezember 31" ]
  then
    holgreet="Happy New Year's Eve."
 else
@@ -97,11 +97,7 @@ fi
 wget -q --tries=20 --timeout=10 http://www.google.com -O /tmp/google.idx &> /dev/null ; 
 if [ -s /tmp/google.idx ]; 
    then
-      if command_exists weather 
-         then
-            wetter
-            suntimes
-      fi
+      wetter
 fi
 echo ''
 fortune -s
