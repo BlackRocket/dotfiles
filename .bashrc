@@ -3,10 +3,11 @@ if [ ! -d "${HOME}/build" ]; then mkdir ${HOME}/build ; chmod 700 ${HOME}/build 
 if [ ! -d "${HOME}/tmp" ]; then mkdir ${HOME}/tmp ; chmod 700 ${HOME}/tmp ; fi
 if [ ! -d "${HOME}/blog" ]; then mkdir ${HOME}/blog ; chmod 700 ${HOME}/blog ; fi
 if [ ! -f $HOME/.bash_history ]; then touch $HOME/.bash_history; fi
-if [ ! -L ~/.bash_keys ]; then ln -s ~/connect/bash_keys ~/.bash_keys; source ~/.bash_keys; fi
+if [ ! -L ~/.bash_keys ]; then ln -s ~/connect/bash_keys ~/.bash_keys; fi
 
 # ---- source ---- #
 if [ -f /etc/bash.bashrc ];       then source /etc/bash.bashrc;         fi
+source ~/.bash_keys;
 source ~/.bash_functions;
 source ~/bin/gitprompt.sh;
 source ~/.bash_colors;
