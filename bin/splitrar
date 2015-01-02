@@ -1,6 +1,7 @@
+#!/bin/sh
 #mksplitrar
 
-#!/bin/s
+
 set -- `getopt "echg:o:p:" "$@"` 
 output="x"
 grose="x"

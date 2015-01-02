@@ -128,9 +128,13 @@ case "$1" in
 		killmpg123
 		mpg123 -q -@ http://stream.radiogroup.de:8000/ffo --title >/dev/null 2>&1 &
 		echo "99.3 Radio Frankfurt/Oder läuft" ;;
-	80er)
+	90er)
 		killmpg123
 		mpg123 -q -@ http://stream.laut.fm/90er --title >/dev/null 2>&1 &
+		echo "80er Radio  läuft" ;;
+	80er)
+		killmpg123
+		mpg123 -q -@ http://stream.laut.fm/80er --title >/dev/null 2>&1 &
 		echo "80er Radio  läuft" ;;
 	m2love)
 		killmpg123
