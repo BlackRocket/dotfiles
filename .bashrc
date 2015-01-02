@@ -1,8 +1,8 @@
 # PATH, Folders & Files
-if [ ! -d "${HOME}/build" ]; then mkdir ${HOME}/build ; chmod 700 ${HOME}/build ; fi
-if [ ! -d "${HOME}/tmp" ]; then mkdir ${HOME}/tmp ; chmod 700 ${HOME}/tmp ; fi
-if [ ! -d "${HOME}/blog" ]; then mkdir ${HOME}/blog ; chmod 700 ${HOME}/blog ; fi
-if [ ! -f $HOME/.bash_history ]; then touch $HOME/.bash_history; fi
+if [ ! -d ~/build ]; then mkdir ~/build ; chmod 700 ~/build ; fi
+if [ ! -d ~/tmp ]; then mkdir ~/tmp ; chmod 700 ~/tmp ; fi
+if [ ! -d ~/blog ]; then mkdir ~/blog ; chmod 700 ~/blog ; fi
+if [ ! -f ~/.bash_history ]; then touch ~/.bash_history; fi
 if [ ! -L ~/.bash_keys ]; then ln -s ~/connect/bash_keys ~/.bash_keys; fi
 
 # ---- source ---- #
@@ -22,7 +22,7 @@ set -b
 set -o notify
 export ARCH="`uname -m`"
 export HISTCONTROL=ignoreboth:erasedups   
-export HISTIGNORE="sudo*:encfs*:&:??:[ ]*:clear:exit:logout:wipe*:ls:ll:la:cd*:cat*:calc*"
+export HISTIGNORE="sudo*:encfs*:&:??:[ ]*:clear:exit:logout:wipe*:ls:ll:la:cd*:cat*"
 export HISTTIMEFORMAT="[%Y-%m-%d - %H:%M:%S] "
 export LANG="de_DE.UTF-8"
 export TZ="Europe/Berlin"
@@ -44,6 +44,7 @@ export LESS_TERMCAP_ue=$'\E[0m'
 export LESS_TERMCAP_us=$'\E[01;31m'
 export VIDEO_FORMAT="PAL"
 export VISUAL="vim"
+export MARKPATH=$HOME/.marks
 shopt -s histappend histreedit histverify
 shopt -s cdspell
 shopt -s checkhash
@@ -113,8 +114,8 @@ alias texdir="perl $HOME/bin/dirtree.pl"
 alias ssh="ssh -X"
 
 # Blog
-alias mblog="sshfs ${DF_FTP_USER}@${DF_FTP_URL}:/ /home/blackrocket/blog ; cd /home/blackrocket/blog"
-alias ublog=".. ; fusermount -u /home/blackrocket/blog"
+alias mblog="sshfs ${DF_FTP_USER}@${DF_FTP_URL}:/ ~/blog ; cd ~/blog"
+alias ublog=".. ; fusermount -u ~/blog"
 alias blogpost="bb post"
 alias postedit="bb edit"
 alias postlist="bb list"
@@ -124,8 +125,12 @@ alias blogrebuild="bb rebuild"
 alias ytmp3='youtube-dl -x --audio-format mp3 --audio-quality 0 -o "%(title)s.%(ext)s" --restrict-filenames'
 alias ytogg='youtube-dl -x --audio-format vorbis --audio-quality 0 -o "%(title)s.%(ext)s" --restrict-filenames'
 alias ytdl='youtube-dl --max-quality=MP4 -o "%(title)s.%(ext)s" --restrict-filenames'
-alias wgeturlfromfile="wget -r -l1 -H -t1 -nd -N -np -A.jpg -erobots=off -i"        # -i file.txt
+alias wgeturlfromfile="wget -r -l1 -H -t1 -nd -N -np -erobots=off -i"        # -i file.txt
 alias wget="wget -c"
+alias wwwmirror2='wget -k -r -l ${2} ${1}'            # wwwmirror2 usage: wwwmirror2 [level] [site_url]
+alias wwwmirror='wget -ErkK -np ${1}'
+alias webdl='wget --random-wait -r -p -e robots=off -U mozilla "$1"'   # download an entire website
+alias imgdl='wget -r -l1 --no-parent -nH -nd -P/tmp -A".gif,.jpg,.png" "$1"'  # download all images from a site
 
 # Apps
 alias vi="vim"
@@ -134,13 +139,12 @@ alias boinc="open $HOME/BOINC/run_manager"
 # Web
 alias DropUp="$HOME/bin/dropbox_uploader upload"
 alias DropDown="$HOME/bin/dropbox_uploader download"
-alias ifdown="$HOME/bin/downforme.sh"
 
 # Notes
-alias note="$HOME/bin/note.sh -n"
-alias listnote="$HOME/bin/note.sh -l"
-alias rmnote="$HOME/bin/note.sh -r"
-alias notevers="$HOME/bin/note.sh -v"
+alias note="note -n"
+alias listnote="note -l"
+alias rmnote="note -r"
+alias notevers="note -v"
 
 # Power 
 alias reboot="sudo shutdown -r now"

@@ -5,6 +5,6 @@ if [ -n "$1" ]; then
 else
     net=$(grep `hostname` /etc/hosts | awk -F '.' '{ print $1"."$2"."$3".0/24"}')
 fi
-sh_info "testing $net for online boxes"
+echo -e "${ewhite}[ i ]${nocol} testing ${net} for online boxes"; 
 sudo nmap -sP $net | awk '/Host/ && /up/ { print $0; }'
-sh_success "done"
+echo -e "${egreen}[ k ]${nocol} done";

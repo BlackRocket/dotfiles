@@ -6,19 +6,12 @@
 
 
 # Bookmarks
-export MARKPATH=$HOME/.marks
 go() { cd -P "$MARKPATH/$1" 2>/dev/null || echo "No such mark: $1"; }
 mark() { mkdir -p "$MARKPATH"; ln -s "$(pwd)" "$MARKPATH/$1"; }
 unmark() { rm -i "$MARKPATH/$1"; }
 marks() { ls -l "$MARKPATH" | sed 's/  / /g' | cut -d' ' -f9- | sed 's/ -/\t-/g' && echo ;}
 
 command_exists () { type "$1" &> /dev/null ; }
-sh_coloroff() { echo -en "$reset_color"; }
-sh_colormsg() { [ -n "$1" ] && echo -en "${fg_bold}${@}${reset_color}"; }
-sh_error() { echo -e "${fg_bold}[ e ]${reset_color} $@"; }
-sh_info() { echo -e "${fg_bold}[ i ]${reset_color} $@"; }
-sh_success() { echo -e "${fg_bold}[ k ]${reset_color} $@"; }
-sh_mesg(){ echo -e "${fg_bold}[ m ]${reset_color} $@"; }
 
 DISTRO='unknown'
 DISTRO=$(lsb_release -i | awk -F ":" '{ print $2 }' | sed -e 's/^[ \t]*//')
@@ -77,10 +70,6 @@ rarpass() { rar xe -p "$1" "$2" "$3" & }
 # usage: open <APP> 
 open() { $1 >/dev/null 2>&1 & }
 
-## rip a file with handbrake and good options
-# usage: rip <MOVIENAME>
-rip() { HandBrakeCLI -i /dev/sr1 -o $HOME/Movies/$1.mp4 -e x264 -q 20 -B 192 -c 1-19 & }
-
 ## Brute force way to block all LSO cookies on Linux system with non-free Flash browser plugin
 # usage: flash
 flash() { for A in $HOME/.macromedia; do ( [ -d $A ] && rm -rf $A ; ln -s -f /dev/null $A ); done }
@@ -121,7 +110,7 @@ echo -e "Sonnenuntergang: ${var_data_sunset}"
 nicemount() { (echo "DEVICE PATH TYPE FLAGS" && mount | awk '$2=$4="";1') | column -t; }
 
 ## online check
-connected() { wget -q --tries=20 --timeout=10 http://www.google.com -O /tmp/google.idx &> /dev/null ; if [ ! -s /tmp/google.idx ]; then CONNECT=0; else CONNECT=1; fi }
+connected() { wget -q --tries=20 --timeout=10 http://www.google.com -O /tmp/google.idx &> /dev/null ; if [ ! -s /tmp/google.idx ]; then echo -e "${ered}OFFLINE${nocol}"; else echo -e "${egreen}ONLINE${nocol}"; fi }
 
 ## geoip lookup (need geoip database: sudo apt-get install geoip-bin)
 geoip() { geoiplookup $1; }
@@ -230,7 +219,7 @@ quickmail() { echo "$*" | mail -s "$*" sebastian@brcs.eu; }
 
 rgc() { git commit -m"`curl -s http://whatthecommit.com/index.txt`"; }
 
-pass() { </dev/urandom tr -dc '12345!@#$%qwertQWERTasdfg47f0)W^9gNa!)LR(TbQjh&UwnvP(tD5eAzr6fk@E&y(umB3^h@!K^cbOCV)ScFJoYi2q@MIX8!1ASDFGzxcvbZXCVBHpZld&xsG47f0)W^9gNa!)LR(TbQjh&UwnvP(tD5eAzr6fk@E&y(umB3^h@!K^cbOCV)ScFJoYi2q@MIX8!1' | head -c$1; echo ""; history -d $(($HISTCMD-1)); }
+pass() { [ -z "$1" ] && length=10 || length=$1; </dev/urandom tr -dc '#4VjADLh7@38=W4fEw3?MmdazfwfDc2w6qF_T}htW!8KAWQ5]mJyxNzWTV4&XxmwMRw+BDs&gkAG8}eU#N[u;j}P5MEw9RRpb(nDjDusPUYqE49BkUUf5DUC}3XSJh7L$])+raq5V(]8KVvVj{2(mph;f6NQ)p83a8Zr9{=yW7s_wLUEuqkFCuBJ3{#7#[B#T;mv?_SA69A8p=yHbJ)E3h(U#5u=QV}bR#wv;)VZQ$T59[e?u=h$;%H]U37crQe8t)n3#d8={S#CHy8KNt}N_)}zfzB8p82FQ(yM}tAZ?w;mU3Va$FP$nynuXP8?rUj6AHmk2L!E76QuBeuqK9cX_r}W6?B$yKUY[69LjM{}kzcLEx2)+5F+=rVS8%GtA8}kZTW9+FSj6VVc]q}[]r{7FEszvYSUTB5m$v$=ZG#y;RA)7kYTBHt7@K_abRUU]t77MUTf8PE%_647{wtj4L}J${J&A#Lmpk[26D7Y]dP]9kSSF?3cqLLcv$8U}E6+QRYp' | head -c${length}; echo "";history -d $(($HISTCMD-1)); }
 
 ## cleanly list available wireless networks (using iwlist)
 wscan() { iwlist wlan0 scan | sed -ne 's#^[[:space:]]*\(Quality=\|Encryption key:\|ESSID:\)#\1#p' -e 's#^[[:space:]]*\(Mode:.*\)$#\1\n#p' ; }
