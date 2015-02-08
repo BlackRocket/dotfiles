@@ -58,11 +58,11 @@ export usmoothgreen="\033[4;38;5;42m"
 export nocol='\e[0m' # Text Reset / No Color
 
 hostcolor() {
-	if [ "`hostname`" == "amalia" ]; then echo "38;5;111" # orange
-	elif [ "`hostname`" == "anniki" ]; then echo "38;5;42" # smoothgreen
-	elif [ "`hostname`" == "ylva" ]; then echo "38;5;1" # red
-	elif [ "`hostname`" == "runa" ]; then echo "38;5;3" # yellow
-	elif [ "`hostname`" == "fenja" ]; then echo "38;5;55" # magenta
+	if [ "`hostname`" == "amalia" ]; then echo "38;5;111" 
+	elif [ "`hostname`" == "anniki" ]; then echo "38;5;42" 
+	elif [ "`hostname`" == "ylva" ]; then echo "38;5;1" 
+	elif [ "`hostname`" == "runa" ]; then echo "38;5;3" 
+	elif [ "`hostname`" == "fenja" ]; then echo "38;5;55" 
 	else echo 36 # cyan
 	fi
 }

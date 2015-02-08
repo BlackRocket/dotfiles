@@ -85,17 +85,24 @@ permfix() { if [ -d "$1" ]; then find "$1" -type d -exec chmod 755 {} -type f -e
 
 ## 
 wetter() { 
-var_data=$(curl -s 'http://weather.tuxnet24.de/?id=GMXX0185')
+weather_file=${HOME}/tmp/weatherfile.txt
 
-var_data_humidity=$(echo "$var_data" | grep humidity | cut -c12-15)
-var_data_temp=$(echo "$var_data" | grep current_temp | cut -c16-25)
-var_data_text=$(echo "$var_data" | grep current_text | cut -c16-60)
-var_data_speed=$(echo "$var_data" | grep speed | cut -c9-20)
-var_data_direction=$(echo "$var_data" | grep direction | cut -c13-17)
-var_data_visib=$(echo "$var_data" | grep visib | cut -c14-25)
-var_data_pressure=$(echo "$var_data" | grep pressure | cut -c12-25)
-var_data_sunrise=$(echo "$var_data" | grep sunrise | cut -c10-17)
-var_data_sunset=$(echo "$var_data" | grep sunset | cut -c9-17)
+if [ ! -e ${weather_file} ] || [ `find ${weather_file} -mmin +30` ]; 
+then
+   curl -s http://weather.tuxnet24.de/?id=GMXX0185 -o ${weather_file}
+fi
+
+weather_data=$(<${weather_file})
+
+var_data_humidity=$(echo "$weather_data" | grep humidity | cut -c12-15)
+var_data_temp=$(echo "$weather_data" | grep current_temp | cut -c16-25)
+var_data_text=$(echo "$weather_data" | grep current_text | cut -c16-60)
+var_data_speed=$(echo "$weather_data" | grep speed | cut -c9-20)
+var_data_direction=$(echo "$weather_data" | grep direction | cut -c13-17)
+var_data_visib=$(echo "$weather_data" | grep visib | cut -c14-25)
+var_data_pressure=$(echo "$weather_data" | grep pressure | cut -c12-25)
+var_data_sunrise=$(echo "$weather_data" | grep sunrise | cut -c10-17)
+var_data_sunset=$(echo "$weather_data" | grep sunset | cut -c9-17)
 
 echo -e "Wetter: ${var_data_temp} ${var_data_text}"
 echo -e "Relative Luftfeuchte: ${var_data_humidity}"

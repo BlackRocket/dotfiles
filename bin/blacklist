@@ -1,13 +1,103 @@
 #!/bin/bash
 
-for url in $(curl -s https://www.iblocklist.com/lists.php \
-| hxwls \
-| grep -v png \
-| grep 'list=' \
-| sed 's|/list.php?list=||g' \
-| sed 's|^|http://list.iblocklist.com/?list=|g' \
-| sed 's|$|\&fileformat=p2p\&archiveformat=gz|g'); do wget --no-verbose "${url}" -O - | gunzip |egrep -v '^#' >> list; done
+# Save path for the blocklist
+blocklist="/home/blackrocket/tmp/blocklist.p2p"
+# Directory for storing temporary lists
+tmpfldr="/tmp"
 
-gzip list
-echo "DONE"
-ls -lah ~/tmp/list.gz
+check_for_depends() {
+  my_needed_commands="cat gunzip mv rm sed sort wget"
+
+  missing_counter=0
+  for needed_command in $my_needed_commands; do
+    if ! hash "$needed_command" >/dev/null 2>&1; then
+      printf "Command not found in PATH: %s\n" "$needed_command" >&2
+      ((missing_counter++))
+    fi
+  done
+
+  if ((missing_counter > 0)); then
+    printf "Minimum %d commands are missing in PATH, aborting\n" "$missing_counter" >&2
+    exit 1
+  fi
+}
+
+backup_blocklist() {
+  # Check for and backup blocklist
+  echo "Checking for blocklist..."
+  if [[ -f "$blocklist" ]]; then
+    echo "Backing up blocklist and overwriting old backup if exists..."
+    mv -f $blocklist ${blocklist}.old
+  fi
+}
+
+downloads_lists() {
+  # Download blocklists
+  # This is where you add/remove blocklists
+  # Downloaded lists must follow the following naming format: bl-[zero or more characters].gz
+  echo "Downloading lists..."
+  wget -nv "http://iblocklist.charlieprice.org/f/tbg_primarythreats.gz" -O $tmpfldr/blocklst_primarythreats.gz
+  wget -nv "http://list.iblocklist.com/?list=dufcxgnbjsdwmwctgfuj&fileformat=p2p&archiveformat=gz"  -O $tmpfldr/blocklst_pedophiles.gz
+  wget -nv "http://list.iblocklist.com/?list=ydxerpxkpcfqjaybcssw&fileformat=p2p&archiveformat=gz"  -O $tmpfldr/blocklst_level1.gz
+  wget -nv "http://list.iblocklist.com/?list=gyisgnzbhppbvsphucsw&fileformat=p2p&archiveformat=gz"  -O $tmpfldr/blocklst_level2.gz
+  wget -nv "http://list.iblocklist.com/?list=uwnukjqktoggdknzrhgh&fileformat=p2p&archiveformat=gz"  -O $tmpfldr/blocklst_level3.gz
+  wget -nv "http://list.iblocklist.com/?list=imlmncgrkbnacgcwfjvh&fileformat=p2p&archiveformat=gz"  -O $tmpfldr/blocklst_edu.gz
+  wget -nv "http://list.iblocklist.com/?list=plkehquoahljmyxjixpu&fileformat=p2p&archiveformat=gz"  -O $tmpfldr/blocklst_rangetest.gz
+  wget -nv "http://list.iblocklist.com/?list=gihxqmhyunbxhbmgqrla&fileformat=p2p&archiveformat=gz"  -O $tmpfldr/blocklst_bogon.gz
+  wget -nv "http://list.iblocklist.com/?list=dgxtneitpuvgqqcpfulq&fileformat=p2p&archiveformat=gz"  -O $tmpfldr/blocklst_ads.gz
+  wget -nv "http://list.iblocklist.com/?list=llvtlsjyoyiczbkjsxpf&fileformat=p2p&archiveformat=gz"  -O $tmpfldr/blocklst_spyware.gz
+  wget -nv "http://list.iblocklist.com/?list=cwworuawihqvocglcoss&fileformat=p2p&archiveformat=gz"  -O $tmpfldr/blocklst_badpeers.gz
+  wget -nv "http://list.iblocklist.com/?list=xshktygkujudfnjfioro&fileformat=p2p&archiveformat=gz"  -O $tmpfldr/blocklst_microsoft.gz
+  wget -nv "http://list.iblocklist.com/?list=mcvxsnihddgutbjfbghy&fileformat=p2p&archiveformat=gz"  -O $tmpfldr/blocklst_spider.gz
+  wget -nv "http://list.iblocklist.com/?list=usrcshglbiilevmyfhse&fileformat=p2p&archiveformat=gz"  -O $tmpfldr/blocklst_hijacked.gz
+  wget -nv "http://list.iblocklist.com/?list=xpbqleszmajjesnzddhv&fileformat=p2p&archiveformat=gz"  -O $tmpfldr/blocklst_dshield.gz
+  wget -nv "http://list.iblocklist.com/?list=ficutxiwawokxlcyoeye&fileformat=p2p&archiveformat=gz"  -O $tmpfldr/blocklst_forumspam.gz
+  wget -nv "http://list.iblocklist.com/?list=ghlzqtqxnzctvvajwwag&fileformat=p2p&archiveformat=gz"  -O $tmpfldr/blocklst_webexploit.gz
+  wget -nv "http://list.iblocklist.com/?list=bcoepfyewziejvcqyhqo&fileformat=p2p&archiveformat=gz"  -O $tmpfldr/blocklst_ianareserved.gz
+  wget -nv "http://list.iblocklist.com/?list=cslpybexmxyuacbyuvib&fileformat=p2p&archiveformat=gz"  -O $tmpfldr/blocklst_ianaprivate.gz
+  wget -nv "http://list.iblocklist.com/?list=pwqnlynprfgtjbgqoizj&fileformat=p2p&archiveformat=gz"  -O $tmpfldr/blocklst_ianamulticast.gz
+  wget -nv "http://list.iblocklist.com/?list=jhaoawihmfxgnvmaqffp&fileformat=p2p&archiveformat=gz"  -O $tmpfldr/blocklst_fornonlancomputers.gz
+  echo "Download complete"
+}
+
+merge_lists() {
+  # Merge blocklists
+  echo "Merging lists..."
+  cat ${tmpfldr}/blocklst_*.gz > ${blocklist}.gz
+}
+
+decompress_blocklist() {
+  # Decompress the gzip archive
+  if [[ -f "${blocklist}.gz" ]]; then
+    echo "Decompressing..."
+    gunzip ${blocklist}.gz
+    echo "Blocklist successfully generated"
+  else
+    echo -e "Unable to find ${blocklist}.gz\nExiting"
+    remove_temp
+    exit 1
+  fi
+}
+
+beautify_blocklist () {
+    echo -e "Beautification process (removing comments, blank lines and sorting)..."
+    cat $blocklist | sed -e 's/([^()]*)//g' -e '/^\#/d' -e '/^$/d' -e 's/\"//g' -e 's/^ //' | sort -u > ${tmpfldr}/blocklist.p2p.tmp
+    iconv --from-code=ISO-8859-1 --to-code=UTF-8 ${tmpfldr}/blocklist.p2p.tmp > $blocklist
+    AMOUNT=`cat $blocklist | wc -l | sed ':a;s/\B[0-9]\{3\}\>/,&/;ta'`
+}
+
+remove_temp() {
+  echo "Removing temporary files..."
+  rm -f ${tmpfldr}/blocklst_*.gz
+}
+
+check_for_depends
+
+backup_blocklist
+downloads_lists
+merge_lists
+decompress_blocklist
+remove_temp
+beautify_blocklist
+echo "Done! Blocked $AMOUNT bad addresses."
+exit 0
