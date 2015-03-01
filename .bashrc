@@ -28,7 +28,7 @@ export LANG="de_DE.UTF-8"
 export TZ="Europe/Berlin"
 export EDITOR="vim"
 export BLOCKSIZE=K        
-export BROWSER="firefox"
+export BROWSER="iceweasel"
 export GPG_TTY="tty"
 export PATH=$PATH:/usr/local:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:$HOME/bin:/usr/lib/wine/bin
 export PATH=$(echo $PATH | awk -F: ' { for (i = 1; i <= NF; i++) arr[$i]; } END { for (i in arr) printf "%s:" , i; printf "\n"; } ')
@@ -103,7 +103,6 @@ alias ipt="sudo iptables -L"
 alias scan="sudo nmap localhost"
 alias net="sudo netstat -ap" 
 alias tail="tail -n 40"
-
 
 # LaTeX
 alias lmk="latexmk -pdflatex=lualatex -pdf -pv -view=pdf"
