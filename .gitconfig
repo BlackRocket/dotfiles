@@ -5,8 +5,8 @@
 
 # INFO -> this only works for alias?!
 #[user]
-  name = "!bash -c 'echo \"$CONFIG_GIT_AUTHOR_NAME\";'"
-  email = "!bash -c 'echo \"$CONFIG_GIT_AUTHOR_EMAIL\";'"
+#  name = "!bash -c 'echo \"$CONFIG_GIT_AUTHOR_NAME\";'"
+#  email = "!bash -c 'echo \"$CONFIG_GIT_AUTHOR_EMAIL\";'"
 
 # A lot of aliases to speed up full-time usage of Git from command line.
 # Long flag names are used for readability wherever possible.
@@ -363,7 +363,7 @@
   # cache the password for http-auth
   helper = cache
 [user]
-	email = sebastian@brcs.eu
+	email = dev@brcs.eu
 	name = BlackRocket
 [push]
 	default = simple
