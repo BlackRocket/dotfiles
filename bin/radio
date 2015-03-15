@@ -82,7 +82,7 @@ case "$1" in
 		echo "technobase.fm läuft" ;;
 	rsw)
 		killmpg123
-		mpg123 -q -@ http://85.25.149.155:7500 >/dev/null 2>&1 &
+		mpg123 -q -@ http://85.25.43.132:7500 >/dev/null 2>&1 &
 		echo "Radio Schwarze Welle läuft" ;;
 	dar)
 		killmpg123

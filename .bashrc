@@ -22,7 +22,7 @@ set -b
 set -o notify
 export ARCH="`uname -m`"
 export HISTCONTROL=ignoreboth:erasedups   
-export HISTIGNORE="sudo*:encfs*:&:??:[ ]*:clear:exit:logout:wipe*:ls:ll:la:cd*:cat*"
+export HISTIGNORE="sudo*:encfs*:&:??:[ ]*:clear:exit:logout:wipe*:ls:ll:la:cd*:cat*:jrnl*:diary*"
 export HISTTIMEFORMAT="[%Y-%m-%d - %H:%M:%S] "
 export LANG="de_DE.UTF-8"
 export TZ="Europe/Berlin"
@@ -134,6 +134,7 @@ alias imgdl='wget -r -l1 --no-parent -nH -nd -P/tmp -A".gif,.jpg,.png" "$1"'  # 
 # Apps
 alias vi="vim"
 alias boinc="open $HOME/BOINC/run_manager"
+alias diary="jrnl"
 
 # Web
 alias DropUp="$HOME/bin/dropbox_uploader upload"

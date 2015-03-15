@@ -363,7 +363,7 @@
   # cache the password for http-auth
   helper = cache
 [user]
-	email = dev@brcs.eu
+	email = sebastian@brcs.eu
 	name = BlackRocket
 [push]
 	default = simple
