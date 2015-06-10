@@ -14,22 +14,26 @@ source ~/.bash_colors;
 source ~/.bash_nonsense;
 
 # Check for an interactive session
-[ -z "$PS1" ] && return
-if [[ $- != *i* ]] ; then return; fi
+case $- in
+    *i*) ;;
+      *) return;;
+esac
 
 # ---- Exports ---- #
 set -b
 set -o notify
 export ARCH="`uname -m`"
-export HISTCONTROL=ignoreboth:erasedups   
+export HISTCONTROL=ignoreboth:erasedups
 export HISTIGNORE="sudo*:encfs*:&:??:[ ]*:clear:exit:logout:wipe*:ls:ll:la:cd*:cat*:jrnl*:diary*"
 export HISTTIMEFORMAT="[%Y-%m-%d - %H:%M:%S] "
 export LANG="de_DE.UTF-8"
 export TZ="Europe/Berlin"
 export EDITOR="vim"
-export BLOCKSIZE=K        
+export BLOCKSIZE=K
 export BROWSER="iceweasel"
 export GPG_TTY="tty"
+export JAVA_HOME="/usr/lib/jvm/java-7-openjdk-amd64/jre"
+export PATH=$PATH:$JAVA_HOME/bin
 export PATH=$PATH:/usr/local:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:$HOME/bin:/usr/lib/wine/bin
 export PATH=$(echo $PATH | awk -F: ' { for (i = 1; i <= NF; i++) arr[$i]; } END { for (i in arr) printf "%s:" , i; printf "\n"; } ')
 export TERM=xterm-256color
@@ -38,8 +42,8 @@ export LESS="-iMFXR"
 export LESS_TERMCAP_mb=$'\E[01;34m'
 export LESS_TERMCAP_md=$'\E[01;34m'
 export LESS_TERMCAP_me=$'\E[0m'
-export LESS_TERMCAP_se=$'\E[0m'                           
-export LESS_TERMCAP_so=$'\E[01;44;33m'                                 
+export LESS_TERMCAP_se=$'\E[0m'
+export LESS_TERMCAP_so=$'\E[01;44;33m'
 export LESS_TERMCAP_ue=$'\E[0m'
 export LESS_TERMCAP_us=$'\E[01;31m'
 export VIDEO_FORMAT="PAL"
@@ -49,13 +53,13 @@ shopt -s histappend histreedit histverify
 shopt -s cdspell
 shopt -s checkhash
 shopt -s checkwinsize
-shopt -s cmdhist 
+shopt -s cmdhist
 shopt -s extglob
 shopt -s nocaseglob
 shopt -s sourcepath
 stty start undef
 stty stop undef
-	
+
 # ---- bash completion ---- #
 if [ -f /etc/bash_completion ];         then source /etc/bash_completion;         fi
 if [ -f $HOME/.bash_complete ];         then source $HOME/.bash_complete;         fi
@@ -88,7 +92,7 @@ alias count="wc -l"
 alias patch="patch -p1 <"
 alias repar="par2 r"
 
-# Apt-get stuff     
+# Apt-get stuff
 alias check="sudo apt-get check"
 alias aptsource="sudo apt-get source"
 alias apti="sudo apt-get install"
@@ -101,7 +105,7 @@ alias dist-upgrade="sudo apt-get -qq update ; sudo apt-get dist-upgrade --assume
 # System
 alias ipt="sudo iptables -L"
 alias scan="sudo nmap localhost"
-alias net="sudo netstat -ap" 
+alias net="sudo netstat -ap"
 alias tail="tail -n 40"
 
 # LaTeX
@@ -129,7 +133,7 @@ alias wget="wget -c"
 alias wwwmirror2='wget -k -r -l ${2} ${1}'            # wwwmirror2 usage: wwwmirror2 [level] [site_url]
 alias wwwmirror='wget -ErkK -np ${1}'
 alias webdl='wget --random-wait -r -p -e robots=off -U mozilla "$1"'   # download an entire website
-alias imgdl='wget -r -l1 --no-parent -nH -nd -P/tmp -A".gif,.jpg,.png" "$1"'  # download all images from a site
+alias imgdl='wget --no-parent -H -nd -p -A".gif,.jpg,.jpeg,.png" "$1"'  # download all images from a site
 
 # Apps
 alias vi="vim"
@@ -146,7 +150,7 @@ alias listnote="note -l"
 alias rmnote="note -r"
 alias notevers="note -v"
 
-# Power 
+# Power
 alias reboot="sudo shutdown -r now"
 alias ShutUp="sudo shutdown -h now"
 alias sleeptime="sudo shutdown -P -h "
@@ -175,37 +179,27 @@ alias 644="chmod 644"
 alias 755="chmod 755"
 alias perm='stat --printf "%a %n \n "' # requires a file name e.g. perm file
 
-# Distro specific alias
-if [[ "$detectedDistro" == "ubuntu" ]]; then
-    alias filescripts='cd ~/.gnome2/nautilus-scripts'
-    alias explore='nautilus --browser .'
-elif [[ "$detectedDistro" == "linuxmint" ]]; then
-    alias filescripts='cd ~/.gnome2/nemo-scripts'
-    alias explore='caja --browser .'
-elif [[ "$detectedDistro" == "lmde" ]]; then
-    alias filescripts='cd ~/.gnome2/nemo-scripts'
-    alias explore='nemo --browser .'
-fi
-
-
 # ---- Stuff to Execute ---- #
 # Source for is_screen(), retval(), retval2(), PROMPT_COMMAND, PS1, require_machine
 # https://github.com/cfenollosa/dotfiles/blob/master/.bashrc
 
-# Avoid being sourced twice
-[[ "`type -t in_array`" == "function" ]] && return 1 
-
 # Check if a value exists in an array
+#
+# $1 Needle
+# $2 Haystack
+# returns 0 if Needle is in Haystack, 1 else
+# example in_array apple "orange apple banana"
 in_array() {
-    haystack=$2
+	haystack=$2
 
-    if [ -z "$1" ]; then return 1; fi
+	if [ -z "$1" ]; then return 1; fi
 
-    for i in ${haystack[@]}; do
-        [[ "$1" == "$i" ]] && return 0
-    done
+	for i in ${haystack[@]}; do
 
-    return 1
+		[[ "$1" == "$i" ]] && return 0
+	done
+
+	return 1
 }
 
 # Test which machine we run on
@@ -214,12 +208,12 @@ require_machine() {
 }
 
 is_screen() {
-  if [[ "$HOSTNAME" == "anniki" ]]; then 
+  if [[ "$HOSTNAME" == "anniki" ]]; then
     screen="`ps -A | grep -i "screen$" | grep -v grep`"
   else
     screen="`ps axuf | grep "^$USER" | grep -i "screen$" | grep -v grep`"
   fi
-  
+
   if [ "$screen" != "" ]; then echo "S "; fi
 }
 
@@ -228,7 +222,7 @@ retval() {
 }
 
 retval2() {
-  if [ $RET -ne 0 ]; then 
+  if [ $RET -ne 0 ]; then
     # Align
     n_his=`echo $1 | wc -c`
     n_ret=`echo $RET | wc -c`
@@ -238,7 +232,7 @@ retval2() {
       n_ret=$(( $n_ret + 1 ))
     done
 
-    echo "$spaces$RET"; 
+    echo "$spaces$RET";
   else
     echo $1
   fi
@@ -254,13 +248,13 @@ log_commands() {
     fi
 }
 
-source ~/.bash_welcome;
+source $HOME/.bash_welcome;
 
 # ---- Machine-specific ---- #
 require_machine anniki
-require_machine runa 
-require_machine ylva 
-require_machine amalia 
+require_machine runa
+require_machine ylva
+require_machine amalia
 require_machine annica
 
 # Make 'source .bashrc' return 0

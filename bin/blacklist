@@ -36,7 +36,7 @@ downloads_lists() {
   # This is where you add/remove blocklists
   # Downloaded lists must follow the following naming format: bl-[zero or more characters].gz
   echo "Downloading lists..."
-  wget -nv "http://iblocklist.charlieprice.org/f/tbg_primarythreats.gz" -O $tmpfldr/blocklst_primarythreats.gz
+  wget -nv "http://list.iblocklist.com/?list=ijfqtofzixtwayqovmxn&fileformat=p2p&archiveformat=gz"  -O $tmpfldr/blocklst_primarythreats.gz
   wget -nv "http://list.iblocklist.com/?list=dufcxgnbjsdwmwctgfuj&fileformat=p2p&archiveformat=gz"  -O $tmpfldr/blocklst_pedophiles.gz
   wget -nv "http://list.iblocklist.com/?list=ydxerpxkpcfqjaybcssw&fileformat=p2p&archiveformat=gz"  -O $tmpfldr/blocklst_level1.gz
   wget -nv "http://list.iblocklist.com/?list=gyisgnzbhppbvsphucsw&fileformat=p2p&archiveformat=gz"  -O $tmpfldr/blocklst_level2.gz

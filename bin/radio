@@ -48,7 +48,7 @@ case "$1" in
 		mpg123 -q -@ http://wackenradio-high.rautemusik.fm >/dev/null 2>&1 &
 		echo "#Wacken läuft" ;;
     rauteclub)
-		killmpg123		
+		killmpg123
 		mpg123 -q -@ http://club-high.rautemusik.fm >/dev/null 2>&1 &
 		echo "#Club läuft" ;;
 	rautebcb)
@@ -145,8 +145,7 @@ case "$1" in
 		exit 0;;
 	help)
 		usage;;
-    *)
+  *)
 		echo ""
-		echo -e "${ered}Keine Radiostation angegeben!${nocol}"
-		usage ;;
+		echo -e "${ered}Keine Radiostation angegeben!${nocol}" ;;
 	esac

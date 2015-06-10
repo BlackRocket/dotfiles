@@ -2,13 +2,13 @@
 #mksplitrar
 
 
-set -- `getopt "echg:o:p:" "$@"` 
+set -- `getopt "echg:o:p:" "$@"`
 output="x"
 grose="x"
 while :
 do
 case "$1" in
-		
+
 	-h) help=1;;
 	-c) dc=1;;
 	-e) ein=1;;
@@ -22,35 +22,35 @@ done
 shift
 files=$*
 hilfe () {
-echo 
+echo
 echo "MkSplit ist ein Script zum erstellen gesplitteten Rar-Archiven."
 echo
 echo "Syntax:"
 echo
-echo "mksplitrar -o [Archiv.rar] -g [Größe der gesplitteten Dateien] Dateien"
+echo "splitrar -o [Archiv.rar] -g [Größe der gesplitteten Dateien] Dateien"
 echo
 echo "Optionen:"
 echo
 echo "-h Help"
-echo 
+echo
 echo "-o Zieldatei z.B -o Test.rar "
-echo 
+echo
 echo "-g Größe der gesplitteten Dateien in Mb z.B. -g 15"
-echo 
+echo
 echo "-p Setzt ein Passwort z.B. -p geheim"
-echo 
+echo
 echo "-c Nur in verbindung von -p, verschlüsselt die Dateinamen."
 echo "Noch ein Beispiel:"
-echo 
+echo
 echo "mksplitrar -o test.rar -g 5 -p geheim -c bild1.jpg bild2.jpg "
-echo 
+echo
 echo "Erzeugt 5 Mb große Splitarchiven in denen bild1.jpg und bild2.jpg enthalten sind die Datein werden erst nach Eingabe des Passworts geheim sichtbar."
 echo
 }
 
 
 if [ "$help" = 1 ]
-	then 
+	then
 	hilfe
 	exit 0
 fi
@@ -67,7 +67,7 @@ if [ "$ein" = 1 ]
 	then echo Passwort eingeben
 	read pw
 	echo "Dateinamen verschlüsseln? ( j oder n )"
-	read dc1 
+	read dc1
 		if [ "$dc1" = "j" ]
 		then dc=1
 		fi
@@ -86,7 +86,7 @@ if [ "$output" = "x" ]
 	hilfe
 	exit 1
 fi
-echo ZielRar: $output  
+echo ZielRar: $output
 echo Zu packende Dateien: $files
 echo Größe pro .part-Datei: $grose MB
 if [ "$grose" = "0" ]
