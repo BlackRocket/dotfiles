@@ -12,6 +12,7 @@ usage() {
     echo "  Rautemusik Club         	=   rauteclub"
     echo "  Rautemusik BigCityBeats 	=   rautebcb"
     echo "  Rautemusik Trance       	=   rautetrance"
+		echo "  Rautemusik House       	=   rautehouse"
     echo "  Rautemusik Main         	=   rautemain"
     echo "  Rautemusik Love Hits    	=   rautelove"
     echo "  UCLA Radio              	=   ucla"
@@ -39,15 +40,15 @@ killmpg123() {
 	if [ "$(pidof mpg123)" ]; then killall mpg123; fi
 }
 case "$1" in
-    rautegoldies)
+  rautegoldies)
 		killmpg123
 		mpg123 -q -@ http://goldies-high.rautemusik.fm >/dev/null 2>&1 &
 		echo "#Goldies läuft" ;;
-    rautewacken)
+  rautewacken)
 		killmpg123
 		mpg123 -q -@ http://wackenradio-high.rautemusik.fm >/dev/null 2>&1 &
 		echo "#Wacken läuft" ;;
-    rauteclub)
+  rauteclub)
 		killmpg123
 		mpg123 -q -@ http://club-high.rautemusik.fm >/dev/null 2>&1 &
 		echo "#Club läuft" ;;
@@ -63,6 +64,10 @@ case "$1" in
 		killmpg123
 		mpg123 -q -@ http://trance-high.rautemusik.fm >/dev/null 2>&1 &
 		echo "#Trance läuft" ;;
+	rautehouse)
+			killmpg123
+			mpg123 -q -@ http://house-high.rautemusik.fm >/dev/null 2>&1 &
+			echo "#House läuft" ;;
 	rautelove)
 		killmpg123
 		killmpg123

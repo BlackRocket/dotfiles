@@ -5,6 +5,9 @@ blocklist="/home/blackrocket/tmp/blocklist.p2p"
 # Directory for storing temporary lists
 tmpfldr="/tmp"
 
+# If I-Blocklist subscription
+subscription=true
+
 check_for_depends() {
   my_needed_commands="cat gunzip mv rm sed sort wget"
 
@@ -36,27 +39,62 @@ downloads_lists() {
   # This is where you add/remove blocklists
   # Downloaded lists must follow the following naming format: bl-[zero or more characters].gz
   echo "Downloading lists..."
-  wget -nv "http://list.iblocklist.com/?list=ijfqtofzixtwayqovmxn&fileformat=p2p&archiveformat=gz"  -O $tmpfldr/blocklst_primarythreats.gz
-  wget -nv "http://list.iblocklist.com/?list=dufcxgnbjsdwmwctgfuj&fileformat=p2p&archiveformat=gz"  -O $tmpfldr/blocklst_pedophiles.gz
-  wget -nv "http://list.iblocklist.com/?list=ydxerpxkpcfqjaybcssw&fileformat=p2p&archiveformat=gz"  -O $tmpfldr/blocklst_level1.gz
-  wget -nv "http://list.iblocklist.com/?list=gyisgnzbhppbvsphucsw&fileformat=p2p&archiveformat=gz"  -O $tmpfldr/blocklst_level2.gz
-  wget -nv "http://list.iblocklist.com/?list=uwnukjqktoggdknzrhgh&fileformat=p2p&archiveformat=gz"  -O $tmpfldr/blocklst_level3.gz
-  wget -nv "http://list.iblocklist.com/?list=imlmncgrkbnacgcwfjvh&fileformat=p2p&archiveformat=gz"  -O $tmpfldr/blocklst_edu.gz
-  wget -nv "http://list.iblocklist.com/?list=plkehquoahljmyxjixpu&fileformat=p2p&archiveformat=gz"  -O $tmpfldr/blocklst_rangetest.gz
-  wget -nv "http://list.iblocklist.com/?list=gihxqmhyunbxhbmgqrla&fileformat=p2p&archiveformat=gz"  -O $tmpfldr/blocklst_bogon.gz
-  wget -nv "http://list.iblocklist.com/?list=dgxtneitpuvgqqcpfulq&fileformat=p2p&archiveformat=gz"  -O $tmpfldr/blocklst_ads.gz
-  wget -nv "http://list.iblocklist.com/?list=llvtlsjyoyiczbkjsxpf&fileformat=p2p&archiveformat=gz"  -O $tmpfldr/blocklst_spyware.gz
-  wget -nv "http://list.iblocklist.com/?list=cwworuawihqvocglcoss&fileformat=p2p&archiveformat=gz"  -O $tmpfldr/blocklst_badpeers.gz
-  wget -nv "http://list.iblocklist.com/?list=xshktygkujudfnjfioro&fileformat=p2p&archiveformat=gz"  -O $tmpfldr/blocklst_microsoft.gz
-  wget -nv "http://list.iblocklist.com/?list=mcvxsnihddgutbjfbghy&fileformat=p2p&archiveformat=gz"  -O $tmpfldr/blocklst_spider.gz
-  wget -nv "http://list.iblocklist.com/?list=usrcshglbiilevmyfhse&fileformat=p2p&archiveformat=gz"  -O $tmpfldr/blocklst_hijacked.gz
-  wget -nv "http://list.iblocklist.com/?list=xpbqleszmajjesnzddhv&fileformat=p2p&archiveformat=gz"  -O $tmpfldr/blocklst_dshield.gz
-  wget -nv "http://list.iblocklist.com/?list=ficutxiwawokxlcyoeye&fileformat=p2p&archiveformat=gz"  -O $tmpfldr/blocklst_forumspam.gz
-  wget -nv "http://list.iblocklist.com/?list=ghlzqtqxnzctvvajwwag&fileformat=p2p&archiveformat=gz"  -O $tmpfldr/blocklst_webexploit.gz
-  wget -nv "http://list.iblocklist.com/?list=bcoepfyewziejvcqyhqo&fileformat=p2p&archiveformat=gz"  -O $tmpfldr/blocklst_ianareserved.gz
-  wget -nv "http://list.iblocklist.com/?list=cslpybexmxyuacbyuvib&fileformat=p2p&archiveformat=gz"  -O $tmpfldr/blocklst_ianaprivate.gz
-  wget -nv "http://list.iblocklist.com/?list=pwqnlynprfgtjbgqoizj&fileformat=p2p&archiveformat=gz"  -O $tmpfldr/blocklst_ianamulticast.gz
-  wget -nv "http://list.iblocklist.com/?list=jhaoawihmfxgnvmaqffp&fileformat=p2p&archiveformat=gz"  -O $tmpfldr/blocklst_fornonlancomputers.gz
+  if [ "$subscription" = true ]; then
+    wget -nv "http://list.iblocklist.com/?list=srzondksmjuwsvmgdbhi&fileformat=p2p&archiveformat=gz&username=${BLOCKLISTUSERNAME}&pin=${BLOCKLISTPIN}"  -O $tmpfldr/blocklst_sub_anti-Infringement.gz
+    wget -nv "http://list.iblocklist.com/?list=lakuncfhfhgiqghqxjzi&fileformat=p2p&archiveformat=gz&username=${BLOCKLISTUSERNAME}&pin=${BLOCKLISTPIN}"  -O $tmpfldr/blocklst_sub_government.gz
+    wget -nv "http://list.iblocklist.com/?list=nrylrfwkqpcnqfszvunb&fileformat=p2p&archiveformat=gz&username=${BLOCKLISTUSERNAME}&pin=${BLOCKLISTPIN}"  -O $tmpfldr/blocklst_sub_p2o_allow.gz
+    wget -nv "http://list.iblocklist.com/?list=rynxmrknfjysesjtjlxy&fileformat=p2p&archiveformat=gz&username=${BLOCKLISTUSERNAME}&pin=${BLOCKLISTPIN}"  -O $tmpfldr/blocklst_sub_spammers.gz
+    wget -nv "http://list.iblocklist.com/?list=dufcxgnbjsdwmwctgfuj&fileformat=p2p&archiveformat=gz&username=${BLOCKLISTUSERNAME}&pin=${BLOCKLISTPIN}"  -O $tmpfldr/blocklst_sub_pedophiles.gz
+    wget -nv "http://list.iblocklist.com/?list=chykyvyiwrfszbqynhnd&fileformat=p2p&archiveformat=gz&username=${BLOCKLISTUSERNAME}&pin=${BLOCKLISTPIN}"  -O $tmpfldr/blocklst_sub_us_government_blacklist.gz
+    wget -nv "http://list.iblocklist.com/?list=tkyphgqwfqmawathcozn&fileformat=p2p&archiveformat=gz&username=${BLOCKLISTUSERNAME}&pin=${BLOCKLISTPIN}"  -O $tmpfldr/blocklst_sub_prime.gz
+    wget -nv "http://list.iblocklist.com/?list=ffxgwdvcgelinvypvhuz&fileformat=p2p&archiveformat=gz&username=${BLOCKLISTUSERNAME}&pin=${BLOCKLISTPIN}"  -O $tmpfldr/blocklst_sub_malicious.gz
+    wget -nv "http://list.iblocklist.com/?list=gzuamdjmitutrcvsmuwv&fileformat=p2p&archiveformat=gz&username=${BLOCKLISTUSERNAME}&pin=${BLOCKLISTPIN}"  -O $tmpfldr/blocklst_sub_piracy_related.gz
+    wget -nv "http://list.iblocklist.com/?list=fruzekpkpzlmzozmuuhx&fileformat=p2p&archiveformat=gz&username=${BLOCKLISTUSERNAME}&pin=${BLOCKLISTPIN}"  -O $tmpfldr/blocklst_sub_ads_and_trackers.gz
+    wget -nv "http://list.iblocklist.com/?list=xafnpguypyaewkmuugbd&fileformat=p2p&archiveformat=gz&username=${BLOCKLISTUSERNAME}&pin=${BLOCKLISTPIN}"  -O $tmpfldr/blocklst_sub_proxies.gz
+    wget -nv "http://list.iblocklist.com/?list=ijfqtofzixtwayqovmxn&fileformat=p2p&archiveformat=gz&username=${BLOCKLISTUSERNAME}&pin=${BLOCKLISTPIN}"  -O $tmpfldr/blocklst_primarythreats.gz
+    wget -nv "http://list.iblocklist.com/?list=dufcxgnbjsdwmwctgfuj&fileformat=p2p&archiveformat=gz&username=${BLOCKLISTUSERNAME}&pin=${BLOCKLISTPIN}"  -O $tmpfldr/blocklst_pedophiles.gz
+    wget -nv "http://list.iblocklist.com/?list=ydxerpxkpcfqjaybcssw&fileformat=p2p&archiveformat=gz&username=${BLOCKLISTUSERNAME}&pin=${BLOCKLISTPIN}"  -O $tmpfldr/blocklst_level1.gz
+    wget -nv "http://list.iblocklist.com/?list=gyisgnzbhppbvsphucsw&fileformat=p2p&archiveformat=gz&username=${BLOCKLISTUSERNAME}&pin=${BLOCKLISTPIN}"  -O $tmpfldr/blocklst_level2.gz
+    wget -nv "http://list.iblocklist.com/?list=uwnukjqktoggdknzrhgh&fileformat=p2p&archiveformat=gz&username=${BLOCKLISTUSERNAME}&pin=${BLOCKLISTPIN}"  -O $tmpfldr/blocklst_level3.gz
+    wget -nv "http://list.iblocklist.com/?list=imlmncgrkbnacgcwfjvh&fileformat=p2p&archiveformat=gz&username=${BLOCKLISTUSERNAME}&pin=${BLOCKLISTPIN}"  -O $tmpfldr/blocklst_edu.gz
+    wget -nv "http://list.iblocklist.com/?list=plkehquoahljmyxjixpu&fileformat=p2p&archiveformat=gz&username=${BLOCKLISTUSERNAME}&pin=${BLOCKLISTPIN}"  -O $tmpfldr/blocklst_rangetest.gz
+    wget -nv "http://list.iblocklist.com/?list=gihxqmhyunbxhbmgqrla&fileformat=p2p&archiveformat=gz&username=${BLOCKLISTUSERNAME}&pin=${BLOCKLISTPIN}"  -O $tmpfldr/blocklst_bogon.gz
+    wget -nv "http://list.iblocklist.com/?list=dgxtneitpuvgqqcpfulq&fileformat=p2p&archiveformat=gz&username=${BLOCKLISTUSERNAME}&pin=${BLOCKLISTPIN}"  -O $tmpfldr/blocklst_ads.gz
+    wget -nv "http://list.iblocklist.com/?list=llvtlsjyoyiczbkjsxpf&fileformat=p2p&archiveformat=gz&username=${BLOCKLISTUSERNAME}&pin=${BLOCKLISTPIN}"  -O $tmpfldr/blocklst_spyware.gz
+    wget -nv "http://list.iblocklist.com/?list=cwworuawihqvocglcoss&fileformat=p2p&archiveformat=gz&username=${BLOCKLISTUSERNAME}&pin=${BLOCKLISTPIN}"  -O $tmpfldr/blocklst_badpeers.gz
+    wget -nv "http://list.iblocklist.com/?list=xshktygkujudfnjfioro&fileformat=p2p&archiveformat=gz&username=${BLOCKLISTUSERNAME}&pin=${BLOCKLISTPIN}"  -O $tmpfldr/blocklst_microsoft.gz
+    wget -nv "http://list.iblocklist.com/?list=mcvxsnihddgutbjfbghy&fileformat=p2p&archiveformat=gz&username=${BLOCKLISTUSERNAME}&pin=${BLOCKLISTPIN}"  -O $tmpfldr/blocklst_spider.gz
+    wget -nv "http://list.iblocklist.com/?list=usrcshglbiilevmyfhse&fileformat=p2p&archiveformat=gz&username=${BLOCKLISTUSERNAME}&pin=${BLOCKLISTPIN}"  -O $tmpfldr/blocklst_hijacked.gz
+    wget -nv "http://list.iblocklist.com/?list=xpbqleszmajjesnzddhv&fileformat=p2p&archiveformat=gz&username=${BLOCKLISTUSERNAME}&pin=${BLOCKLISTPIN}"  -O $tmpfldr/blocklst_dshield.gz
+    wget -nv "http://list.iblocklist.com/?list=ficutxiwawokxlcyoeye&fileformat=p2p&archiveformat=gz&username=${BLOCKLISTUSERNAME}&pin=${BLOCKLISTPIN}"  -O $tmpfldr/blocklst_forumspam.gz
+    wget -nv "http://list.iblocklist.com/?list=ghlzqtqxnzctvvajwwag&fileformat=p2p&archiveformat=gz&username=${BLOCKLISTUSERNAME}&pin=${BLOCKLISTPIN}"  -O $tmpfldr/blocklst_webexploit.gz
+    wget -nv "http://list.iblocklist.com/?list=bcoepfyewziejvcqyhqo&fileformat=p2p&archiveformat=gz&username=${BLOCKLISTUSERNAME}&pin=${BLOCKLISTPIN}"  -O $tmpfldr/blocklst_ianareserved.gz
+    wget -nv "http://list.iblocklist.com/?list=cslpybexmxyuacbyuvib&fileformat=p2p&archiveformat=gz&username=${BLOCKLISTUSERNAME}&pin=${BLOCKLISTPIN}"  -O $tmpfldr/blocklst_ianaprivate.gz
+    wget -nv "http://list.iblocklist.com/?list=pwqnlynprfgtjbgqoizj&fileformat=p2p&archiveformat=gz&username=${BLOCKLISTUSERNAME}&pin=${BLOCKLISTPIN}"  -O $tmpfldr/blocklst_ianamulticast.gz
+    wget -nv "http://list.iblocklist.com/?list=jhaoawihmfxgnvmaqffp&fileformat=p2p&archiveformat=gz&username=${BLOCKLISTUSERNAME}&pin=${BLOCKLISTPIN}"  -O $tmpfldr/blocklst_fornonlancomputers.gz
+  else
+    wget -nv "http://list.iblocklist.com/?list=ijfqtofzixtwayqovmxn&fileformat=p2p&archiveformat=gz"  -O $tmpfldr/blocklst_primarythreats.gz
+    wget -nv "http://list.iblocklist.com/?list=dufcxgnbjsdwmwctgfuj&fileformat=p2p&archiveformat=gz"  -O $tmpfldr/blocklst_pedophiles.gz
+    wget -nv "http://list.iblocklist.com/?list=ydxerpxkpcfqjaybcssw&fileformat=p2p&archiveformat=gz"  -O $tmpfldr/blocklst_level1.gz
+    wget -nv "http://list.iblocklist.com/?list=gyisgnzbhppbvsphucsw&fileformat=p2p&archiveformat=gz"  -O $tmpfldr/blocklst_level2.gz
+    wget -nv "http://list.iblocklist.com/?list=uwnukjqktoggdknzrhgh&fileformat=p2p&archiveformat=gz"  -O $tmpfldr/blocklst_level3.gz
+    wget -nv "http://list.iblocklist.com/?list=imlmncgrkbnacgcwfjvh&fileformat=p2p&archiveformat=gz"  -O $tmpfldr/blocklst_edu.gz
+    wget -nv "http://list.iblocklist.com/?list=plkehquoahljmyxjixpu&fileformat=p2p&archiveformat=gz"  -O $tmpfldr/blocklst_rangetest.gz
+    wget -nv "http://list.iblocklist.com/?list=gihxqmhyunbxhbmgqrla&fileformat=p2p&archiveformat=gz"  -O $tmpfldr/blocklst_bogon.gz
+    wget -nv "http://list.iblocklist.com/?list=dgxtneitpuvgqqcpfulq&fileformat=p2p&archiveformat=gz"  -O $tmpfldr/blocklst_ads.gz
+    wget -nv "http://list.iblocklist.com/?list=llvtlsjyoyiczbkjsxpf&fileformat=p2p&archiveformat=gz"  -O $tmpfldr/blocklst_spyware.gz
+    wget -nv "http://list.iblocklist.com/?list=cwworuawihqvocglcoss&fileformat=p2p&archiveformat=gz"  -O $tmpfldr/blocklst_badpeers.gz
+    wget -nv "http://list.iblocklist.com/?list=xshktygkujudfnjfioro&fileformat=p2p&archiveformat=gz"  -O $tmpfldr/blocklst_microsoft.gz
+    wget -nv "http://list.iblocklist.com/?list=mcvxsnihddgutbjfbghy&fileformat=p2p&archiveformat=gz"  -O $tmpfldr/blocklst_spider.gz
+    wget -nv "http://list.iblocklist.com/?list=usrcshglbiilevmyfhse&fileformat=p2p&archiveformat=gz"  -O $tmpfldr/blocklst_hijacked.gz
+    wget -nv "http://list.iblocklist.com/?list=xpbqleszmajjesnzddhv&fileformat=p2p&archiveformat=gz"  -O $tmpfldr/blocklst_dshield.gz
+    wget -nv "http://list.iblocklist.com/?list=ficutxiwawokxlcyoeye&fileformat=p2p&archiveformat=gz"  -O $tmpfldr/blocklst_forumspam.gz
+    wget -nv "http://list.iblocklist.com/?list=ghlzqtqxnzctvvajwwag&fileformat=p2p&archiveformat=gz"  -O $tmpfldr/blocklst_webexploit.gz
+    wget -nv "http://list.iblocklist.com/?list=bcoepfyewziejvcqyhqo&fileformat=p2p&archiveformat=gz"  -O $tmpfldr/blocklst_ianareserved.gz
+    wget -nv "http://list.iblocklist.com/?list=cslpybexmxyuacbyuvib&fileformat=p2p&archiveformat=gz"  -O $tmpfldr/blocklst_ianaprivate.gz
+    wget -nv "http://list.iblocklist.com/?list=pwqnlynprfgtjbgqoizj&fileformat=p2p&archiveformat=gz"  -O $tmpfldr/blocklst_ianamulticast.gz
+    wget -nv "http://list.iblocklist.com/?list=jhaoawihmfxgnvmaqffp&fileformat=p2p&archiveformat=gz"  -O $tmpfldr/blocklst_fornonlancomputers.gz
+  fi
   echo "Download complete"
 }
 
