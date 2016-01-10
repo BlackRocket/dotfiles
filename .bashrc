@@ -116,14 +116,6 @@ alias texdir="perl $HOME/bin/dirtree.pl"
 # remote
 alias ssh="ssh -X"
 
-# Blog
-alias mblog="sshfs ${DF_FTP_USER}@${DF_FTP_URL}:/ ~/blog ; cd ~/blog"
-alias ublog=".. ; fusermount -u ~/blog"
-alias blogpost="bb post"
-alias postedit="bb edit"
-alias postlist="bb list"
-alias blogrebuild="bb rebuild"
-
 # Download
 alias ytmp3='youtube-dl -x --audio-format mp3 --audio-quality 0 -o "%(title)s.%(ext)s" --restrict-filenames'
 alias ytogg='youtube-dl -x --audio-format vorbis --audio-quality 0 -o "%(title)s.%(ext)s" --restrict-filenames'
