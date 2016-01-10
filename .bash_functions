@@ -128,6 +128,9 @@ findtcp() { (netstat  -atn | awk '{printf "%s\n%s\n", $4, $4}' | grep -oE '[0-9]
 ##
 addclock() { while sleep 1;do tput sc;tput cup 0 $(($(tput cols)-29));date;tput rc;done & }
 
+##
+vidscreen() { ffmpeg -loglevel panic -y -i "$1" -frames 1 -q:v 1 -vf "select=not(mod(n\,40))" "$1_preview.jpg"; }
+
 ## Creates a backup of the file passed as parameter with the date and time
 bak() { cp $1 $1_`date +%H:%M:%S_%d-%m-%Y` ; }
 
