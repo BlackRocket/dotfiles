@@ -127,7 +127,7 @@ alias blogrebuild="bb rebuild"
 # Download
 alias ytmp3='youtube-dl -x --audio-format mp3 --audio-quality 0 -o "%(title)s.%(ext)s" --restrict-filenames'
 alias ytogg='youtube-dl -x --audio-format vorbis --audio-quality 0 -o "%(title)s.%(ext)s" --restrict-filenames'
-alias ytdl='youtube-dl --max-quality=MP4 -o "%(title)s.%(ext)s" --restrict-filenames'
+alias ytdl='youtube-dl -o "%(title)s.%(ext)s" --restrict-filenames'
 alias wgeturlfromfile="wget -r -l1 -H -t1 -nd -N -np -erobots=off -i"        # -i file.txt
 alias wget="wget -c"
 alias wwwmirror2='wget -k -r -l ${2} ${1}'            # wwwmirror2 usage: wwwmirror2 [level] [site_url]
