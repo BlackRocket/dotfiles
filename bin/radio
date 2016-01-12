@@ -29,7 +29,6 @@ usage() {
     echo "  Delta Radio             	=   delta"
     echo "  Antenne Brandenburg     	=   antenne"
     echo "  Radio UNiCC             	=   unicc"
-    echo "  99.3 Radio Frankfurt/Oder 	=   ffo"
     echo "  80er Radio                	=   80er"
     echo "  90er Radio                	=   90er"
     echo "  M2 Love Radio               	=   m2love"
