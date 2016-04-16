@@ -1,7 +1,6 @@
 # PATH, Folders & Files
 if [ ! -d ~/build ]; then mkdir ~/build ; chmod 700 ~/build ; fi
 if [ ! -d ~/tmp ]; then mkdir ~/tmp ; chmod 700 ~/tmp ; fi
-if [ ! -d ~/blog ]; then mkdir ~/blog ; chmod 700 ~/blog ; fi
 if [ ! -f ~/.bash_history ]; then touch ~/.bash_history; fi
 if [ ! -L ~/.bash_keys ]; then ln -s ~/connect/bash_keys ~/.bash_keys; fi
 
@@ -96,6 +95,7 @@ alias repar="par2 r"
 alias check="sudo apt-get check"
 alias aptsource="sudo apt-get source"
 alias apti="sudo apt-get install"
+alias aptib="sudo apt-get -t jessie-backports install"
 alias apta="sudo apt-add-repository"
 alias aptu="sudo apt-get update"
 alias aptr="sudo apt-get remove"
@@ -129,8 +129,9 @@ alias imgdl='wget --no-parent -H -nd -p -A".gif,.jpg,.jpeg,.png" "$1"'  # downlo
 
 # Apps
 alias vi="vim"
-alias boinc="open $HOME/BOINC/run_manager"
 alias diary="jrnl"
+alias sync="$HOME/sync/btsync --config $HOME/connect/btsync.conf"
+alias paper="paperwork"
 
 # Web
 alias DropUp="$HOME/bin/dropbox_uploader upload"
@@ -170,6 +171,29 @@ alias 000="chmod 000"
 alias 644="chmod 644"
 alias 755="chmod 755"
 alias perm='stat --printf "%a %n \n "' # requires a file name e.g. perm file
+
+#  git aliases
+alias glg="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative"
+alias gst='git status'
+alias gl='git pull'
+alias gp='git push'
+alias gc='git commit -v'
+alias gca='git commit -v -a'
+alias gb='git branch'
+alias gco='git checkout'
+alias gcob='git checkout -b'
+alias glog='git log'
+alias gd='git diff --color'
+alias gcl='git clone'
+
+# dev stuff
+alias cless='lessc --clean-css'
+alias setnpm='npm run setup'
+alias instnpm='npm install'
+alias gdist='grunt dist'
+alias gwhat='grunt watch'
+alias compi='composer install'
+alias compu='composer update'
 
 # ---- Stuff to Execute ---- #
 # Source for is_screen(), retval(), retval2(), PROMPT_COMMAND, PS1, require_machine
