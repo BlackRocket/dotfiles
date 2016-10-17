@@ -3,11 +3,6 @@
 # Bashrc greetings				 #
 ##################################################
 
-# Info on startup
-echo -e "\e[1;1m$(uname -s -r)\e[0m ($HOSTNAME)"
-echo $(uptime) | cut -d' ' -f2-
-echo ''
-
 ###### greeting
 # # from Jonathan's .bashrc file (by ~71KR117)
 # # get current hour (24 clock format i.e. 0-23)
@@ -58,11 +53,11 @@ elif [ "$day" = "Juni 15" ]
 elif [ "$day" = "Oktober 31" ]
  then
    holgreet="Happy Halloween."
-# # if it is ninth november 
+# # if it is ninth november
 elif [ "$day" = "November 5" ]
  then
    holgreet="Remember, remember the Fifth of November Gunpowder, treason and plot; I know of no reason why gunpowder treason Should ever be forgot."
-# # if it is ninth november 
+# # if it is ninth november
 elif [ "$day" = "November 9" ]
  then
    holgreet="Das tritt nach meiner Kenntnis... ist das sofort... unverzüglich."
@@ -94,8 +89,13 @@ elif [ "$hol" = "0" ]
    randomvarthatsomehowimportant=0
 fi
 
-wget -q --tries=20 --timeout=10 http://www.google.com -O /tmp/google.idx &> /dev/null ; 
-if [ -s /tmp/google.idx ]; 
+# Info on startup
+echo ''
+screenfetch
+echo ''
+
+wget -q --tries=20 --timeout=10 http://www.google.com -O /tmp/google.idx &> /dev/null ;
+if [ -s /tmp/google.idx ];
    then
       wetter
 fi

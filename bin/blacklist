@@ -45,7 +45,7 @@ downloads_lists() {
     wget -nv "http://list.iblocklist.com/?list=nrylrfwkqpcnqfszvunb&fileformat=p2p&archiveformat=gz&username=${BLOCKLISTUSERNAME}&pin=${BLOCKLISTPIN}"  -O $tmpfldr/blocklst_sub_p2o_allow.gz
     wget -nv "http://list.iblocklist.com/?list=rynxmrknfjysesjtjlxy&fileformat=p2p&archiveformat=gz&username=${BLOCKLISTUSERNAME}&pin=${BLOCKLISTPIN}"  -O $tmpfldr/blocklst_sub_spammers.gz
     wget -nv "http://list.iblocklist.com/?list=dufcxgnbjsdwmwctgfuj&fileformat=p2p&archiveformat=gz&username=${BLOCKLISTUSERNAME}&pin=${BLOCKLISTPIN}"  -O $tmpfldr/blocklst_sub_pedophiles.gz
-    wget -nv "http://list.iblocklist.com/?list=chykyvyiwrfszbqynhnd&fileformat=p2p&archiveformat=gz&username=${BLOCKLISTUSERNAME}&pin=${BLOCKLISTPIN}"  -O $tmpfldr/blocklst_sub_us_government_blacklist.gz
+    wget -nv "http://list.iblocklist.com/?list=chykyvyiwrfszbqynhnd&fileformat=p2p&archiveformat=gz&&username=${BLOCKLISTUSERNAME}&pin=${BLOCKLISTPIN}"  -O $tmpfldr/blocklst_sub_us_government_blacklist.gz
     wget -nv "http://list.iblocklist.com/?list=tkyphgqwfqmawathcozn&fileformat=p2p&archiveformat=gz&username=${BLOCKLISTUSERNAME}&pin=${BLOCKLISTPIN}"  -O $tmpfldr/blocklst_sub_prime.gz
     wget -nv "http://list.iblocklist.com/?list=ffxgwdvcgelinvypvhuz&fileformat=p2p&archiveformat=gz&username=${BLOCKLISTUSERNAME}&pin=${BLOCKLISTPIN}"  -O $tmpfldr/blocklst_sub_malicious.gz
     wget -nv "http://list.iblocklist.com/?list=gzuamdjmitutrcvsmuwv&fileformat=p2p&archiveformat=gz&username=${BLOCKLISTUSERNAME}&pin=${BLOCKLISTPIN}"  -O $tmpfldr/blocklst_sub_piracy_related.gz
